@@ -1,0 +1,2262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sebin &amp; Christo — October 10, 2026</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@300;400;500;600&family=Instrument+Serif:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg:        #fcf7ed;
+      --surface:   #fffaf1;
+      --surf-acc:  #f6edd7;
+      --text:      #2f241b;
+      --muted:     #76614d;
+      --accent:    #8a5a2b;
+      --acc-soft:  #e7c88a;
+      --border:    rgba(47,36,27,0.12);
+      --btn-text:  #fff9f1;
+      --foot-over: rgba(17,12,9,0.52);
+      --polar-bg:  #f8f3e8;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration:.01ms!important; transition-duration:.01ms!important; }
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; border: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Instrument Sans', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    img { display: block; }
+    button { font-family: inherit; background: none; cursor: pointer; }
+    a { text-decoration: none; color: inherit; }
+
+    /* ── NAV ── */
+    .nav {
+      position: fixed;
+      top: 18px; left: 16px; right: 16px;
+      z-index: 50;
+    }
+    .nav-pill {
+      position: relative;
+      height: 52px;
+      max-width: 1600px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 24px;
+      background: rgba(255,255,255,0.85);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-radius: 9999px;
+      border: 1px solid rgba(0,0,0,0.08);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.10);
+      color: rgb(93,83,76);
+      overflow: visible;
+    }
+    .nav-logo {
+      font-family: 'Instrument Serif', serif;
+      font-style: italic;
+      font-size: 18px;
+      letter-spacing: -0.02em;
+      transition: opacity .25s;
+    }
+    .nav-logo:hover { opacity: .7; }
+    .nav-links {
+      display: none;
+      align-items: center;
+      gap: 24px;
+      font-size: 14px;
+      color: rgb(93,83,76);
+    }
+    @media (min-width: 768px) { .nav-links { display: flex; } }
+    .nav-links a { transition: opacity .2s; }
+    .nav-links a:hover { opacity: .6; }
+    .nav-right { display: flex; align-items: center; gap: 12px; }
+    .nav-rsvp {
+      background: #000;
+      color: #fff;
+      border-radius: 9999px;
+      padding: 6px 16px;
+      font-size: 14px;
+      font-weight: 500;
+      transition: opacity .25s;
+    }
+    .nav-rsvp:hover { opacity: .8; }
+    .ham-btn {
+      padding: 8px;
+      transition: transform .3s;
+      color: inherit;
+    }
+    .ham-btn:hover { transform: scale(1.1); }
+    @media (min-width: 768px) { .ham-btn { display: none; } }
+    .ham-lines {
+      display: flex; flex-direction: column;
+      justify-content: space-between;
+      width: 24px; height: 10px;
+    }
+    .ham-lines span {
+      display: block; height: 2px; width: 100%;
+      background: currentColor;
+      transition: all .3s;
+      border-radius: 1px;
+    }
+    .nav-dropdown {
+      position: absolute;
+      top: calc(100% + 8px); right: 0;
+      min-width: 160px;
+      background: rgba(255,255,255,0.9);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-radius: 16px;
+      border: 1px solid rgba(0,0,0,0.05);
+      padding: 16px;
+      text-align: right;
+      box-shadow: 0 25px 50px rgba(0,0,0,0.12);
+      pointer-events: none;
+      opacity: 0;
+      transform: scale(.95);
+      transform-origin: top right;
+      transition: opacity .25s, transform .25s;
+    }
+    .nav-dropdown.open { pointer-events: auto; opacity: 1; transform: scale(1); }
+    .nav-dropdown ul { list-style: none; display: flex; flex-direction: column; gap: 16px; }
+    .nav-dropdown a { display: block; padding: 8px; font-size: 18px; color: rgba(0,0,0,.8); transition: color .2s; }
+    .nav-dropdown a:hover { color: #000; }
+
+    /* ── HERO ── */
+    .hero-zoom-outer {
+      position: relative;
+      height: 280vh;
+    }
+    .hero {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      height: 100svh;
+      overflow: hidden;
+      background: var(--bg);
+      /* flex centering for the card — matches original */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    /* The shrinking card — JS controls width/height/borderRadius/translateY */
+    .hero-media {
+      position: relative;
+      width: 97vw; height: 97svh;
+      overflow: hidden;
+      border-radius: 18px;
+      will-change: transform, border-radius, width, height;
+      flex-shrink: 0;
+    }
+    .hero-img {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      object-position: 50% 50%;
+    }
+    .hero-over {
+      position: absolute; inset: 0;
+      background: rgba(0,0,0,.22);
+    }
+    /* Text content inside the card — fades & scales with card */
+    .hero-content {
+      position: absolute; inset: 0;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: flex-end;
+      padding-bottom: 0;
+      pointer-events: none;
+      will-change: opacity;
+    }
+    /* Name SVG — absolutely pinned 128px from card bottom, scale-origin at bottom */
+    .hero-name-wrap {
+      position: absolute;
+      bottom: 128px; left: 0; right: 0;
+      display: flex;
+      justify-content: center;
+      padding: 0 24px;
+      transform-origin: bottom center;
+      will-change: transform;
+    }
+    @media (min-width: 768px) { .hero-name-wrap { padding: 0 48px; } }
+    .hero-name-svg { width: 100%; height: auto; overflow: visible; }
+
+    /* Scroll indicator bar — at the very bottom of the card */
+    .hero-bar {
+      position: relative;
+      width: 100%; z-index: 10;
+      display: flex; flex-direction: column;
+      gap: 24px;
+      padding: 0 24px 16px;
+    }
+    @media (min-width: 768px) { .hero-bar { padding: 0 48px 16px; gap: 16px; } }
+    .hero-line { width: 100%; height: 1px; background: rgba(255,255,255,.5); }
+    .hero-scroll-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 11px;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: .4em;
+      color: rgba(255,255,255,.9);
+    }
+
+    /* ── BREAKOUT PHOTO COLUMNS (outside card, inside .hero section) ── */
+    /* Two columns flanking the hero card, exactly matching cordially.io's layout  */
+    .bp-col {
+      position: absolute; z-index: 6;
+      display: none; /* shown only on desktop by JS after layout computed */
+      flex-direction: column;
+      gap: 10px;
+      pointer-events: none;
+    }
+    @media (min-width: 768px) { .bp-col { display: flex; } }
+    .bp-card {
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 20px 60px rgba(0,0,0,.30);
+      will-change: transform;
+      flex-shrink: 0;
+    }
+    .bp-card img {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover; display: block;
+    }
+
+    /* ── DETAIL PANEL DRAWER ── */
+    .dp-overlay {
+      position: fixed; inset: 0; z-index: 800;
+      background: rgba(0,0,0,0.38);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+    .dp-overlay.dp-open { opacity: 1; pointer-events: auto; }
+    .dp-panel {
+      position: fixed; top: 0; right: 0; bottom: 0;
+      width: min(560px, 100vw);
+      background: var(--surface);
+      z-index: 801;
+      overflow-y: auto; overflow-x: hidden;
+      transform: translateX(105%);
+      transition: transform 0.38s cubic-bezier(.22,1,.36,1);
+      display: flex; flex-direction: column;
+      box-shadow: -24px 0 80px rgba(0,0,0,.18);
+    }
+    .dp-overlay.dp-open .dp-panel { transform: translateX(0); }
+    .dp-header {
+      position: sticky; top: 0; z-index: 2;
+      background: var(--surface);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 28px 28px 24px;
+      border-bottom: 1px solid var(--border);
+    }
+    .dp-title {
+      font-family: 'Instrument Serif', serif; font-weight: 400;
+      font-size: clamp(1.6rem, 3vw, 2.1rem); color: var(--text); line-height: 1.1;
+    }
+    .dp-close {
+      width: 36px; height: 36px; border-radius: 50%;
+      background: var(--surf-acc); flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; transition: opacity .2s; color: var(--text);
+    }
+    .dp-close:hover { opacity: .6; }
+    .dp-body { padding: 32px 28px 48px; flex: 1; }
+    .dp-section { margin-bottom: 40px; }
+    .dp-section:last-child { margin-bottom: 0; }
+    .dp-section-label {
+      font-size: 11px; font-weight: 600; letter-spacing: .12em;
+      text-transform: uppercase; color: var(--muted);
+      margin-bottom: 20px;
+    }
+    /* Wedding Parties */
+    .dp-party-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+    @media (min-width: 480px) { .dp-party-grid { grid-template-columns: repeat(3, 1fr); gap: 16px; } }
+    .dp-person { text-align: center; }
+    .dp-person-avatar {
+      width: 100%; aspect-ratio: 1;
+      border-radius: 50%; overflow: hidden;
+      background: var(--surf-acc);
+      margin-bottom: 10px;
+    }
+    .dp-person-avatar img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .dp-person-initials {
+      width: 100%; height: 100%;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Instrument Serif', serif; font-size: 1.5rem;
+      color: var(--muted);
+    }
+    .dp-person-name { font-size: .9rem; font-weight: 600; color: var(--text); margin-bottom: 2px; }
+    .dp-person-role { font-size: .8rem; color: var(--muted); }
+    /* Travel / info rows */
+    .dp-info-row {
+      display: flex; gap: 16px; align-items: flex-start;
+      padding: 16px 0; border-bottom: 1px solid var(--border);
+    }
+    .dp-info-row:last-child { border-bottom: none; }
+    .dp-info-icon {
+      width: 36px; height: 36px; flex-shrink: 0;
+      border-radius: 10px; background: var(--surf-acc);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--accent);
+    }
+    .dp-info-text { flex: 1; }
+    .dp-info-title { font-size: .95rem; font-weight: 600; color: var(--text); margin-bottom: 4px; }
+    .dp-info-desc { font-size: .875rem; color: var(--muted); line-height: 1.5; }
+    .dp-info-link {
+      display: inline-block; margin-top: 6px;
+      font-size: .8rem; font-weight: 500;
+      color: var(--accent); text-decoration: underline;
+    }
+    /* Hotel cards */
+    .dp-hotel {
+      border: 1px solid var(--border); border-radius: 16px;
+      padding: 18px; margin-bottom: 14px;
+      background: var(--bg);
+    }
+    .dp-hotel:last-child { margin-bottom: 0; }
+    .dp-hotel-name { font-size: 1rem; font-weight: 600; color: var(--text); margin-bottom: 4px; }
+    .dp-hotel-dist { font-size: .825rem; color: var(--muted); margin-bottom: 10px; }
+    .dp-hotel-link {
+      font-size: .825rem; font-weight: 500; color: var(--accent);
+      border: 1px solid var(--acc-soft); border-radius: 9999px;
+      padding: 5px 14px; display: inline-block;
+      transition: background .2s;
+    }
+    .dp-hotel-link:hover { background: var(--surf-acc); }
+    /* Registry cards */
+    .dp-reg-card {
+      display: flex; align-items: center; gap: 16px;
+      border: 1px solid var(--border); border-radius: 16px;
+      padding: 18px; margin-bottom: 14px; background: var(--bg);
+    }
+    .dp-reg-card:last-child { margin-bottom: 0; }
+    .dp-reg-icon {
+      width: 48px; height: 48px; flex-shrink: 0;
+      border-radius: 12px; background: var(--surf-acc);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.4rem;
+    }
+    .dp-reg-text { flex: 1; }
+    .dp-reg-name { font-size: 1rem; font-weight: 600; color: var(--text); margin-bottom: 2px; }
+    .dp-reg-desc { font-size: .825rem; color: var(--muted); }
+    .dp-reg-btn {
+      font-size: .825rem; font-weight: 500; color: var(--accent);
+      border: 1px solid var(--acc-soft); border-radius: 9999px;
+      padding: 6px 14px; white-space: nowrap; flex-shrink: 0;
+      transition: background .2s;
+    }
+    .dp-reg-btn:hover { background: var(--surf-acc); }
+    /* Menu items */
+    .dp-menu-group { margin-bottom: 28px; }
+    .dp-menu-course {
+      font-size: 11px; font-weight: 600; letter-spacing: .1em;
+      text-transform: uppercase; color: var(--accent);
+      margin-bottom: 12px;
+    }
+    .dp-menu-item {
+      padding: 12px 0; border-bottom: 1px solid var(--border);
+      display: flex; justify-content: space-between; align-items: baseline; gap: 16px;
+    }
+    .dp-menu-item:last-child { border-bottom: none; }
+    .dp-menu-name { font-size: .925rem; font-weight: 500; color: var(--text); }
+    .dp-menu-note { font-size: .8rem; color: var(--muted); text-align: right; }
+    /* Dress code swatch */
+    .dp-swatch-row { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 16px; }
+    .dp-swatch {
+      display: flex; align-items: center; gap: 10px;
+      padding: 8px 14px; border-radius: 9999px;
+      border: 1px solid var(--border); background: var(--bg);
+    }
+    .dp-swatch-dot { width: 18px; height: 18px; border-radius: 50%; flex-shrink: 0; }
+    .dp-swatch-label { font-size: .825rem; color: var(--text); }
+    /* Music links */
+    .dp-playlist {
+      display: flex; align-items: center; gap: 14px;
+      padding: 14px; border-radius: 16px; background: var(--bg);
+      border: 1px solid var(--border); margin-bottom: 12px;
+      transition: background .2s;
+    }
+    .dp-playlist:hover { background: var(--surf-acc); }
+    .dp-playlist:last-child { margin-bottom: 0; }
+    .dp-playlist-icon {
+      width: 42px; height: 42px; border-radius: 10px;
+      flex-shrink: 0; display: flex; align-items: center; justify-content: center;
+      font-size: 1.3rem;
+    }
+    .dp-playlist-info { flex: 1; }
+    .dp-playlist-name { font-size: .925rem; font-weight: 600; color: var(--text); }
+    .dp-playlist-desc { font-size: .8rem; color: var(--muted); }
+    .dp-divider { height: 1px; background: var(--border); margin: 32px 0; }
+    .dp-note {
+      background: var(--surf-acc); border-radius: 12px;
+      padding: 16px 18px; font-size: .875rem; color: var(--muted); line-height: 1.55;
+    }
+
+    /* ── LIGHTBOX ── */
+    .lb-overlay {
+      position: fixed; inset: 0; z-index: 900;
+      background: rgba(0,0,0,0.52);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      display: flex; align-items: center; justify-content: center;
+      padding: 24px;
+      opacity: 0;
+      transition: opacity 0.22s ease;
+      pointer-events: none;
+    }
+    .lb-overlay.lb-open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .lb-card {
+      position: relative;
+      background: var(--polar-bg);
+      border-radius: 0.45rem;
+      border: 1px solid rgba(0,0,0,0.1);
+      padding: 5%;
+      padding-bottom: 13%;
+      box-shadow: 0 40px 80px rgba(0,0,0,0.40);
+      width: min(460px, 90vw);
+      transform: scale(0.92);
+      transition: transform 0.22s cubic-bezier(.22,1,.36,1);
+    }
+    .lb-overlay.lb-open .lb-card {
+      transform: scale(1);
+    }
+    .lb-photo-wrap {
+      position: relative;
+      width: 100%;
+      padding-top: 130%;
+      overflow: hidden;
+      border-radius: 0.2rem;
+      background: rgba(0,0,0,.06);
+    }
+    .lb-img {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover; display: block;
+    }
+    .lb-close {
+      position: absolute;
+      top: 10px; right: 10px;
+      width: 30px; height: 30px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.85);
+      backdrop-filter: blur(4px);
+      border: 1px solid rgba(0,0,0,0.08);
+      font-size: 16px; line-height: 1;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.18);
+      color: var(--text);
+      transition: opacity .2s;
+      z-index: 2;
+    }
+    .lb-close:hover { opacity: 0.7; }
+    .lb-caption {
+      position: absolute;
+      bottom: 4.5%; left: 50%;
+      transform: translateX(-50%);
+      text-align: center;
+      font-size: clamp(0.85rem, 1.8vw, 1rem);
+      color: rgba(0,0,0,0.7);
+      white-space: nowrap;
+    }
+    .pol-inner { cursor: pointer; }
+
+    @keyframes bounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(5px)} }
+    .bounce { animation: bounce 1.4s ease-in-out infinite; }
+
+    /* ── VISION PARAGRAPHS ── */
+    .vision-section {
+      position: relative; z-index: 30;
+      min-height: 60svh;
+      display: flex; align-items: center; justify-content: center;
+      padding: 96px 24px;
+      text-align: center;
+      background: var(--bg);
+    }
+    .vision-p {
+      font-family: 'Instrument Serif', serif;
+      font-style: normal;
+      font-weight: 700;
+      line-height: 1.05;
+      letter-spacing: -.025em;
+      color: var(--text);
+      max-width: 90vw;
+    }
+    .vision-p.large { font-size: clamp(3rem, 5.5vw, 6rem); }
+    .vision-p.medium { font-size: clamp(3rem, 3.75vw, 3.75rem); }
+    .vw { display: inline; opacity: .4; transition: opacity .3s ease-out; }
+    .vw.lit { opacity: 1; }
+
+    /* ── STORY SECTION ── */
+    .story-outer {
+      position: relative; z-index: 30;
+      height: calc(600vh);
+      width: 100%;
+    }
+    .story-sticky {
+      position: sticky; top: 0;
+      height: 100vh; height: 100svh; width: 100%;
+      overflow: hidden;
+      background: var(--bg);
+    }
+
+    /* "our story" title */
+    .story-title-row {
+      pointer-events: none;
+      position: absolute; top: 80px; left: 0; right: 0; z-index: 0;
+      display: flex; justify-content: center;
+      padding: 0 16px;
+    }
+    .story-title {
+      font-family: 'Instrument Serif', serif;
+      font-style: normal; font-weight: 700;
+      font-size: clamp(10vw, 14vw, 200px);
+      line-height: 1; letter-spacing: -.025em;
+      white-space: nowrap;
+      color: var(--text);
+      opacity: 0; transform: translateY(32px);
+      transition: opacity 1.2s ease, transform 1.2s ease;
+    }
+
+    /* Chapter captions — desktop */
+    .ch-cap {
+      pointer-events: none;
+      position: absolute; top: 316px; left: 0; right: 0; z-index: 25;
+      display: none;
+      opacity: 0;
+    }
+    @media (min-width: 768px) { .ch-cap { display: block; } }
+    .ch-cap-inner {
+      max-width: 1400px; margin: 0 auto;
+      padding: 0 32px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .ch-cap-left  { width: 25%; padding: 0 16px; text-align: right; }
+    .ch-cap-right { width: 25%; padding: 0 16px; text-align: left; }
+    .ch-spacer    { flex-shrink: 0; }
+    .ch-cap h3 { font-size: 1.5rem; font-weight: 700; margin-bottom: 8px; color: var(--text); }
+    .ch-cap p  { font-size: 1.125rem; color: var(--muted); line-height: 1.5; }
+
+    /* Chapter captions — mobile */
+    .ch-cap-mob {
+      pointer-events: none;
+      position: absolute; top: 200px; left: 0; right: 0; z-index: 25;
+      padding: 0 16px; text-align: center;
+      opacity: 0;
+    }
+    @media (min-width: 768px) { .ch-cap-mob { display: none; } }
+    .ch-cap-mob h3 { font-size: clamp(1.25rem,5vw,1.5rem); font-weight: 700; margin-bottom: 8px; color: var(--text); }
+    .ch-cap-mob p  { max-width: 42rem; margin: 0 auto; font-size: clamp(.9rem,3.6vw,1rem); line-height: 1.38; color: var(--muted); }
+
+    /* Polaroid card wrappers */
+    .pol-card-wrap {
+      position: absolute; top: 316px; left: 0; right: 0; z-index: 20;
+      max-width: 1400px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: center;
+      flex-direction: column; padding: 0 16px;
+      opacity: 0;
+      will-change: transform;
+    }
+    @media (min-width: 768px) { .pol-card-wrap { flex-direction: row; padding: 0 32px; } }
+    /* Mobile: push cards below the caption text area */
+    @media (max-width: 767px) {
+      .pol-card-wrap { top: 340px; }
+      .story-title { font-size: 19vw; }
+    }
+    .pol-spacer { display: none; }
+    @media (min-width: 768px) { .pol-spacer { display: block; width: 25%; } }
+
+    .pol-outer { position: relative; flex-shrink: 0; }
+    .pol-inner { width: 100%; height: 100%; transition: transform .3s ease; }
+    @media (min-width: 768px) { .pol-inner:hover { transform: translateY(-16px) scale(1.03); } }
+
+    .pol {
+      position: relative; width: 100%; height: 100%;
+      border-radius: .45rem;
+      border: 1px solid rgba(0,0,0,.1);
+      background: var(--polar-bg);
+      padding: 4.5%; padding-bottom: 18%;
+      box-shadow: 0 14px 42px rgba(0,0,0,.32);
+      transition: box-shadow .3s;
+    }
+    .pol:hover { box-shadow: 0 20px 40px rgba(0,0,0,.30); }
+    .pol-photo {
+      position: relative; width: 100%; height: 100%;
+      overflow: hidden; border-radius: .2rem; background: rgba(0,0,0,.05);
+    }
+    .pol-photo img {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%; object-fit: cover;
+    }
+    .pol-caption {
+      position: absolute; bottom: 7%; left: 50%; transform: translateX(-50%);
+      max-width: 90%; white-space: nowrap; text-align: center;
+      font-size: clamp(.7rem,1.8vw,1rem);
+      color: rgba(0,0,0,.7);
+    }
+
+    /* ── LOGISTICS — sticky date ── */
+    .log-outer {
+      position: relative; z-index: 20;
+      height: 200vh; width: 100%;
+    }
+    .log-sticky {
+      position: sticky; top: 0;
+      height: 100vh; height: 100svh; width: 100%;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      padding: 0 16px; text-align: center;
+      background: var(--bg);
+    }
+    .log-kicker {
+      font-family: 'Instrument Serif', serif;
+      font-style: normal;
+      font-size: clamp(2.5rem, 3.75vw, 3.75rem);
+      line-height: .92; color: var(--text);
+      margin-bottom: 56px;
+    }
+    .log-date-svg { width: 100%; max-width: 1120px; height: auto; overflow: visible; margin-bottom: 56px; }
+    .cd-row {
+      display: flex; align-items: flex-start; justify-content: center; gap: 12px;
+    }
+    @media (min-width: 640px)  { .cd-row { gap: 16px; } }
+    .cd-unit { display: flex; flex-direction: column; align-items: center; width: 64px; }
+    @media (min-width: 640px)  { .cd-unit { width: 80px; } }
+    @media (min-width: 768px)  { .cd-unit { width: 96px; } }
+    .cd-num {
+      font-weight: 300;
+      font-size: clamp(1.875rem, 3.5vw, 3.75rem);
+      line-height: 1; margin-bottom: 8px;
+      color: var(--text);
+    }
+    .cd-label {
+      font-size: clamp(.55rem,.65rem,.875rem);
+      text-transform: uppercase; letter-spacing: .15em; opacity: .8;
+      color: var(--text);
+    }
+    .cd-sep {
+      font-weight: 300;
+      font-size: clamp(1.5rem,2.5vw,3rem);
+      opacity: .3; color: var(--text);
+      margin-top: 4px;
+    }
+
+    /* ── LOGISTICS — venue ── */
+    .venue-section {
+      background: var(--bg);
+      padding: 0 16px 128px;
+      text-align: center;
+    }
+    @media (min-width: 768px) { .venue-section { padding: 0 24px 192px; } }
+    .venue-inner { max-width: 1152px; margin: 0 auto; }
+    .venue-img-wrap {
+      position: relative;
+      aspect-ratio: 16/9; width: 100%;
+      overflow: hidden; border-radius: 16px;
+      margin-bottom: 96px;
+    }
+    .venue-img { width: 100%; height: 100%; object-fit: cover; }
+    .venue-name {
+      font-family: 'Instrument Serif', serif;
+      font-style: normal;
+      font-size: clamp(2.5rem, 3.75vw, 3.75rem);
+      line-height: .92; color: var(--text);
+      margin-bottom: 16px;
+    }
+    .venue-addr {
+      font-size: 12px; font-weight: 500;
+      text-transform: uppercase; letter-spacing: .2em;
+      color: var(--text); opacity: .8;
+      display: inline-block; margin-bottom: 80px;
+      transition: opacity .2s;
+    }
+    @media (min-width: 768px) { .venue-addr { font-size: 14px; } }
+    .venue-addr:hover { opacity: 1; }
+
+    .rsvp-pile { display: flex; flex-direction: column; align-items: center; margin-top: 10px; }
+    .rsvp-btn {
+      display: inline-flex; align-items: center; justify-content: center;
+      border-radius: 9999px;
+      padding: 16px 48px;
+      font-size: 12px; font-weight: 500;
+      text-transform: uppercase; letter-spacing: .2em;
+      background: var(--accent); color: var(--btn-text);
+      margin-bottom: 10px;
+      transition: transform .3s;
+    }
+    @media (min-width: 768px) { .rsvp-btn { font-size: 14px; } }
+    .rsvp-btn:hover { transform: scale(1.05); }
+    .rsvp-by {
+      font-size: 12px; font-weight: 500;
+      text-transform: uppercase; letter-spacing: .2em;
+      color: var(--text); opacity: .8;
+    }
+    @media (min-width: 768px) { .rsvp-by { font-size: 14px; } }
+
+    /* ── DETAILS GRID ── */
+    .details-section {
+      background: var(--surf-acc);
+      padding: 96px 32px;
+    }
+    @media (min-width: 768px) { .details-section { padding: 112px 40px; } }
+    @media (min-width: 1280px) { .details-section { padding: 112px 64px; } }
+    .details-hd-wrap { text-align: center; margin-bottom: 48px; }
+    .details-hd {
+      font-family: 'Instrument Serif', serif; font-style: normal;
+      font-size: clamp(2.5rem, 3.75vw, 3.75rem);
+      line-height: .92; color: var(--text);
+      margin-bottom: 16px;
+    }
+    .details-sub {
+      max-width: 48rem; margin: 0 auto;
+      font-size: 1rem; color: var(--muted); line-height: 1.6;
+    }
+    @media (min-width: 768px) { .details-sub { font-size: 1.125rem; } }
+    .details-grid {
+      max-width: 1600px; margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+    @media (min-width: 768px) { .details-grid { grid-template-columns: 1fr 1fr; gap: 32px; } }
+    @media (min-width: 1280px) { .details-grid { grid-template-columns: 1fr 1fr 1fr; } }
+    .d-card {
+      position: relative; aspect-ratio: 4/3;
+      border: none; padding: 0;
+      cursor: pointer; text-align: left;
+      background: none; display: block; width: 100%;
+    }
+    .d-card-bg {
+      position: absolute; inset: 0;
+      overflow: hidden; border-radius: 32px;
+      border: 1px solid rgba(0,0,0,.05);
+      box-shadow: 0 1px 3px rgba(0,0,0,.1);
+      background: rgba(0,0,0,.05);
+    }
+    .d-card-img {
+      width: 100%; height: 100%; object-fit: cover;
+      transition: transform .7s ease;
+    }
+    .d-card:hover .d-card-img { transform: scale(1.05); }
+    .d-card-grad {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,.6), rgba(0,0,0,.2) 50%, transparent);
+    }
+    .d-card-body {
+      position: absolute; inset: 0;
+      display: flex; flex-direction: column; justify-content: flex-end;
+      padding: 24px 80px 24px 24px; color: #fff;
+    }
+    @media (min-width: 768px) { .d-card-body { padding: 32px 96px 32px 32px; } }
+    .d-card-title { font-size: 1.875rem; font-weight: 700; margin-bottom: 8px; }
+    @media (min-width: 768px) { .d-card-title { font-size: 2.25rem; } }
+    .d-card-sub { font-size: 1.125rem; opacity: .9; }
+    @media (min-width: 768px) { .d-card-sub { font-size: 1.25rem; } }
+    .d-card-plus {
+      position: absolute; bottom: 24px; right: 24px;
+      width: 48px; height: 48px;
+      display: flex; align-items: center; justify-content: center;
+      border-radius: 9999px;
+      background: rgba(255,255,255,.3);
+      transition: transform .3s, background .3s;
+    }
+    @media (min-width: 768px) {
+      .d-card-plus {
+        bottom: 32px; right: 32px;
+        background: rgba(255,255,255,.2);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+      }
+    }
+    .d-card:hover .d-card-plus { transform: scale(1.1); background: rgba(255,255,255,.3); }
+
+    /* ── FAQ ── */
+    .faq-section {
+      background: var(--bg);
+      padding: 96px 24px;
+    }
+    @media (min-width: 768px) { .faq-section { padding: 128px 24px; } }
+    .faq-inner {
+      max-width: 1152px; margin: 0 auto;
+      display: flex; flex-direction: column; gap: 64px;
+    }
+    @media (min-width: 1024px) { .faq-inner { flex-direction: row; gap: 96px; } }
+    .faq-left { }
+    @media (min-width: 1024px) { .faq-left { width: 33.333%; } }
+    .faq-left-inner { }
+    @media (min-width: 1024px) { .faq-left-inner { position: sticky; top: 128px; } }
+    .faq-hd {
+      font-family: 'Instrument Serif', serif; font-style: normal;
+      font-weight: 700; line-height: 1.1; letter-spacing: -.025em;
+      font-size: 3rem; color: var(--text); margin-bottom: 24px;
+    }
+    @media (min-width: 768px) { .faq-hd { font-size: 3.75rem; } }
+    @media (min-width: 1024px) { .faq-hd { font-size: 4.5rem; } }
+    .faq-left-sub { font-size: 1.125rem; color: var(--muted); margin-bottom: 4px; }
+    @media (min-width: 768px) { .faq-left-sub { font-size: 1.25rem; } }
+    .faq-link {
+      font-size: 1.125rem; color: var(--text);
+      text-decoration: underline; text-underline-offset: 4px;
+      transition: opacity .2s;
+    }
+    @media (min-width: 768px) { .faq-link { font-size: 1.25rem; } }
+    .faq-link:hover { opacity: .8; }
+    .faq-right { flex: 1; }
+    .faq-list { border-top: 1px solid rgba(47,36,27,.2); }
+    .faq-item { border-bottom: 1px solid rgba(47,36,27,.2); }
+    .faq-btn {
+      display: flex; width: 100%;
+      align-items: flex-start; justify-content: space-between;
+      padding: 24px 0; text-align: left;
+      gap: 16px; background: none; border: none; cursor: pointer;
+    }
+    .faq-q {
+      flex: 1;
+      font-size: 1.125rem; font-weight: 500;
+      color: var(--text);
+      transition: opacity .2s;
+    }
+    @media (min-width: 768px) { .faq-q { font-size: 1.25rem; } }
+    .faq-btn:hover .faq-q { opacity: .8; }
+    .faq-ico {
+      flex-shrink: 0; margin-top: 4px;
+      width: 24px; height: 24px;
+      display: flex; align-items: center; justify-content: center;
+      border-radius: 4px;
+      background: rgba(47,36,27,.1);
+      color: var(--text);
+    }
+    .faq-ico svg { transition: transform .3s ease; }
+    .faq-btn[aria-expanded="true"] .faq-ico svg { transform: rotate(180deg); }
+    .faq-body {
+      overflow: hidden; max-height: 0; opacity: 0;
+      transition: max-height .35s ease, opacity .3s ease;
+    }
+    .faq-body.open { max-height: 600px; opacity: 1; }
+    .faq-ans {
+      white-space: pre-line; padding-bottom: 24px; padding-right: 16px;
+      font-size: 1rem; line-height: 1.625; color: var(--muted);
+    }
+    @media (min-width: 768px) { .faq-ans { padding-right: 48px; font-size: 1.125rem; } }
+
+    /* ── FOOTER ── */
+    .site-footer {
+      position: relative;
+      height: 100vh; height: 100svh; width: 100%;
+      padding: 12px;
+    }
+    @media (min-width: 768px) { .site-footer { padding: 16px 16px 24px; } }
+    @media (min-width: 1024px) { .site-footer { padding: 20px; } }
+    .footer-inner {
+      position: relative; height: 100%; width: 100%;
+      display: flex; align-items: center; justify-content: center;
+      overflow: hidden; border-radius: 24px;
+    }
+    .footer-img {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%; object-fit: cover; opacity: .9;
+    }
+    .footer-over {
+      position: absolute; inset: 0;
+      background: var(--foot-over);
+    }
+    .footer-content {
+      position: relative; z-index: 10;
+      max-width: 64rem; width: 100%;
+      transform: translateY(-5vh);
+      padding: 0 24px; text-align: center; color: #fff;
+    }
+    .footer-quote {
+      font-family: 'Instrument Serif', serif;
+      font-style: normal;
+      font-size: clamp(2.5rem, 5vw, 5rem);
+      line-height: .92;
+      max-height: 58vh; overflow: hidden;
+    }
+
+    /* ── Hero entrance animations ── */
+    /* hero-content fades the whole text group in */
+    @keyframes contentFadeIn { from { opacity: 0; } to { opacity: 1; } }
+    .hero-content { animation: contentFadeIn 1s ease 0.3s both; }
+
+    /* hero-name-wrap slides up (transform only — opacity from parent) */
+    @keyframes nameSlideUp { from { transform: translateY(40px); } to { transform: translateY(0); } }
+    .hero-name-wrap { animation: nameSlideUp 1.4s cubic-bezier(.22,1,.36,1) .3s both; }
+
+    /* ── Scroll reveal utility ── */
+    .sr { opacity: 0; transform: translateY(32px); transition: opacity 1s ease, transform 1s ease; }
+    .sr.on { opacity: 1; transform: translateY(0); }
+
+    /* ═══════ PASSWORD GATE ═══════ */
+    body.pw-locked { overflow: hidden; }
+
+    #pw-screen { position: fixed; inset: 0; z-index: 9999; font-family: 'Instrument Sans', sans-serif; }
+    #pw-screen.pw-gone { display: none; }
+
+    #pw-curtain-l, #pw-curtain-r {
+      position: absolute; top: 0; bottom: 0; width: 50%;
+      background: var(--bg);
+      transition: transform 0.78s cubic-bezier(.76,0,.24,1);
+    }
+    #pw-curtain-l { left: 0; }
+    #pw-curtain-r { right: 0; }
+    #pw-screen.pw-open #pw-curtain-l { transform: translateX(-100%); }
+    #pw-screen.pw-open #pw-curtain-r { transform: translateX(100%); }
+
+    #pw-content {
+      position: absolute; inset: 0; z-index: 1;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      padding: 24px;
+      transition: opacity 0.22s ease 0.36s;
+    }
+    #pw-screen.pw-open #pw-content { opacity: 0; pointer-events: none; }
+
+    #pw-title {
+      font-family: 'Instrument Serif', serif;
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      color: var(--text); letter-spacing: -0.01em;
+      margin-bottom: 6px; text-align: center;
+    }
+    #pw-title em { font-style: italic; color: var(--accent); }
+    #pw-sub {
+      font-size: 0.78rem; color: var(--muted);
+      letter-spacing: 0.14em; text-transform: uppercase;
+      margin-bottom: 44px; text-align: center;
+    }
+
+    #pw-row { display: flex; align-items: flex-end; gap: 20px; }
+
+    .pw-char svg { display: block; overflow: visible; }
+    .pw-head-grp {
+      transform-box: fill-box;
+      transform-origin: 50% 95%;
+    }
+    .pw-char.pw-err .pw-head-grp { animation: pw-nod 0.58s ease; }
+    @keyframes pw-nod {
+      0%,100% { transform: rotate(0deg); }
+      13%  { transform: rotate(-13deg); }
+      33%  { transform: rotate(11deg); }
+      53%  { transform: rotate(-9deg); }
+      73%  { transform: rotate(6deg); }
+      89%  { transform: rotate(-3deg); }
+    }
+    .pw-frown { display: none; }
+    .pw-char.pw-err .pw-smile { display: none; }
+    .pw-char.pw-err .pw-frown { display: block; }
+
+    #pw-input-wrap { display: flex; flex-direction: column; align-items: center; gap: 16px; }
+    #pw-field-row  { display: flex; flex-direction: column; align-items: center; gap: 13px; }
+
+    #pw-input {
+      width: 230px; padding: 14px 18px;
+      font-family: 'Instrument Sans', sans-serif;
+      font-size: 0.95rem; font-weight: 500;
+      letter-spacing: 0.16em; text-align: center; text-transform: uppercase;
+      background: var(--surface);
+      border: 1.5px solid rgba(47,36,27,0.18);
+      border-radius: 10px; color: var(--text); outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    #pw-input::placeholder { text-transform: none; letter-spacing: 0.04em; font-weight: 400; opacity: 0.45; }
+    #pw-input:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(138,90,43,0.13);
+    }
+    #pw-input.pw-shake {
+      animation: pw-shake 0.48s ease;
+      border-color: #b03428; box-shadow: 0 0 0 3px rgba(176,52,40,0.12);
+    }
+    @keyframes pw-shake {
+      0%,100% { transform: translateX(0); }
+      15% { transform: translateX(-9px); }
+      35% { transform: translateX(8px); }
+      55% { transform: translateX(-6px); }
+      75% { transform: translateX(5px); }
+      90% { transform: translateX(-2px); }
+    }
+    #pw-btn {
+      padding: 12px 40px;
+      background: var(--accent); color: var(--btn-text);
+      font-family: 'Instrument Sans', sans-serif;
+      font-size: 0.8rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase;
+      border-radius: 100px; cursor: pointer; border: none;
+      box-shadow: 0 4px 20px rgba(138,90,43,0.28);
+      transition: background 0.18s, transform 0.12s, box-shadow 0.18s;
+    }
+    #pw-btn:hover { background: #7a4f22; transform: translateY(-1px); box-shadow: 0 6px 24px rgba(138,90,43,0.36); }
+    #pw-btn:active { transform: translateY(0); }
+    #pw-err-msg {
+      font-size: 0.78rem; color: #b03428;
+      letter-spacing: 0.04em; min-height: 18px; text-align: center;
+      opacity: 0; transition: opacity 0.2s;
+    }
+    #pw-err-msg.pw-show { opacity: 1; }
+
+    @media (max-width: 560px) {
+      .pw-char svg { width: 60px; height: 135px; }
+      #pw-row { gap: 12px; }
+      #pw-input { width: 190px; }
+    }
+    @media (max-width: 380px) { .pw-char { display: none; } }
+  </style>
+</head>
+<body>
+
+<!-- ═══════ PASSWORD GATE ═══════ -->
+<div id="pw-screen">
+  <div id="pw-curtain-l"></div>
+  <div id="pw-curtain-r"></div>
+  <div id="pw-content">
+    <h1 id="pw-title">Sebin &amp; <em>Christo</em></h1>
+    <p id="pw-sub">Enter your invitation code</p>
+    <div id="pw-row">
+
+      <!-- Bride (left) -->
+      <div class="pw-char" id="pw-bride">
+        <svg viewBox="0 0 80 180" width="80" height="180" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Veil halo -->
+          <ellipse cx="40" cy="38" rx="36" ry="40" fill="#f5eedf" opacity="0.82"/>
+          <!-- Dress body (static) -->
+          <path d="M18 76 Q28 82 40 82 Q52 82 62 76 L74 180 L6 180Z" fill="#e8dece"/>
+          <path d="M18 76 Q28 82 40 82 Q52 82 62 76 L60 98 L20 98Z" fill="#ddd0be"/>
+          <!-- Sash -->
+          <path d="M22 98 Q40 105 58 98 L57 107 Q40 114 23 107Z" fill="#c4a070"/>
+          <!-- Bouquet -->
+          <circle cx="10" cy="112" r="6"  fill="#c06880"/>
+          <circle cx="16" cy="106" r="5"  fill="#e090a8"/>
+          <circle cx="7"  cy="105" r="5"  fill="#d07890"/>
+          <circle cx="17" cy="115" r="4"  fill="#f0bcc8"/>
+          <path d="M12 118 Q10 130 11 140" stroke="#6a9060" stroke-width="2.5" stroke-linecap="round"/>
+          <!-- Head group (animated) -->
+          <g class="pw-head-grp">
+            <!-- Neck -->
+            <rect x="36" y="68" width="8" height="12" rx="3" fill="#f0cf98"/>
+            <!-- Head -->
+            <circle cx="40" cy="47" r="25" fill="#f0cf98"/>
+            <!-- Hair bun & updo -->
+            <ellipse cx="40" cy="27" rx="15" ry="11" fill="#7a4f2d"/>
+            <ellipse cx="27" cy="34" rx="9"  ry="10" fill="#7a4f2d"/>
+            <ellipse cx="53" cy="34" rx="9"  ry="10" fill="#7a4f2d"/>
+            <!-- Hair flower pin -->
+            <circle cx="55" cy="26" r="5"  fill="#e8a8b4"/>
+            <circle cx="55" cy="26" r="2.5" fill="#c07888"/>
+            <!-- Eyes -->
+            <circle cx="32" cy="45" r="3.5" fill="#2c1608"/>
+            <circle cx="48" cy="45" r="3.5" fill="#2c1608"/>
+            <!-- Eye shine -->
+            <circle cx="33.5" cy="43.5" r="1.5" fill="white"/>
+            <circle cx="49.5" cy="43.5" r="1.5" fill="white"/>
+            <!-- Lashes -->
+            <path d="M29 40 Q32 38 35 40" stroke="#2c1608" stroke-width="1.3" stroke-linecap="round" fill="none"/>
+            <path d="M45 40 Q48 38 51 40" stroke="#2c1608" stroke-width="1.3" stroke-linecap="round" fill="none"/>
+            <!-- Blush -->
+            <ellipse cx="27" cy="53" rx="6" ry="3.5" fill="#f4a098" opacity="0.45"/>
+            <ellipse cx="53" cy="53" rx="6" ry="3.5" fill="#f4a098" opacity="0.45"/>
+            <!-- Smile (default) -->
+            <path class="pw-smile" d="M33 58 Q40 65 47 58" stroke="#3d1a08" stroke-width="2" stroke-linecap="round" fill="none"/>
+            <!-- Frown (error) -->
+            <path class="pw-frown" d="M33 64 Q40 57 47 64" stroke="#a02010" stroke-width="2" stroke-linecap="round" fill="none"/>
+          </g>
+        </svg>
+      </div>
+
+      <!-- Input area -->
+      <div id="pw-input-wrap">
+        <div id="pw-field-row">
+          <input id="pw-input" type="text" placeholder="Invitation code" maxlength="20" autocomplete="off" spellcheck="false" autocorrect="off" autocapitalize="characters"/>
+          <button id="pw-btn" type="button">Enter</button>
+        </div>
+        <p id="pw-err-msg">Incorrect code — try again</p>
+      </div>
+
+      <!-- Groom (right) -->
+      <div class="pw-char" id="pw-groom">
+        <svg viewBox="0 0 80 180" width="80" height="180" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Jacket body (static) -->
+          <path d="M10 76 Q20 82 40 80 Q60 82 70 76 L78 180 L2 180Z" fill="#3d2b1a"/>
+          <!-- Lapels -->
+          <path d="M40 76 L28 84 L26 130 L38 130Z" fill="#4d3828"/>
+          <path d="M40 76 L52 84 L54 130 L42 130Z" fill="#4d3828"/>
+          <!-- White shirt strip -->
+          <rect x="35" y="74" width="10" height="54" rx="1" fill="white" opacity="0.92"/>
+          <!-- Shirt buttons -->
+          <circle cx="40" cy="88"  r="1.4" fill="#d0c0a8"/>
+          <circle cx="40" cy="98"  r="1.4" fill="#d0c0a8"/>
+          <circle cx="40" cy="108" r="1.4" fill="#d0c0a8"/>
+          <!-- Pocket square -->
+          <path d="M57 86 L64 86 L63 92 L57 91Z" fill="#c8a060" opacity="0.75"/>
+          <!-- Head group (animated) -->
+          <g class="pw-head-grp">
+            <!-- Neck -->
+            <rect x="36" y="68" width="8" height="12" rx="3" fill="#f0cf98"/>
+            <!-- Collar -->
+            <path d="M33 72 L40 80 L47 72 L45 67 L35 67Z" fill="white"/>
+            <!-- Bow tie -->
+            <path d="M36 72 L40 75 L44 72 L40 69Z" fill="#8a5a2b"/>
+            <!-- Head -->
+            <circle cx="40" cy="47" r="25" fill="#f0cf98"/>
+            <!-- Hair (short, neat) -->
+            <path d="M15 42 C15 22 26 10 40 10 C54 10 65 22 65 42 C65 32 56 23 40 23 C24 23 15 32 15 42Z" fill="#7a4f2d"/>
+            <!-- Side hair -->
+            <path d="M15 42 Q14 36 17 32" stroke="#7a4f2d" stroke-width="7" stroke-linecap="round" fill="none"/>
+            <path d="M65 42 Q66 36 63 32" stroke="#7a4f2d" stroke-width="7" stroke-linecap="round" fill="none"/>
+            <!-- Eyes -->
+            <circle cx="32" cy="45" r="3.5" fill="#2c1608"/>
+            <circle cx="48" cy="45" r="3.5" fill="#2c1608"/>
+            <!-- Eye shine -->
+            <circle cx="33.5" cy="43.5" r="1.5" fill="white"/>
+            <circle cx="49.5" cy="43.5" r="1.5" fill="white"/>
+            <!-- Blush (subtle for groom) -->
+            <ellipse cx="27" cy="53" rx="5" ry="3" fill="#f4a098" opacity="0.25"/>
+            <ellipse cx="53" cy="53" rx="5" ry="3" fill="#f4a098" opacity="0.25"/>
+            <!-- Smile (default) -->
+            <path class="pw-smile" d="M33 58 Q40 65 47 58" stroke="#3d1a08" stroke-width="2" stroke-linecap="round" fill="none"/>
+            <!-- Frown (error) -->
+            <path class="pw-frown" d="M33 64 Q40 57 47 64" stroke="#a02010" stroke-width="2" stroke-linecap="round" fill="none"/>
+          </g>
+        </svg>
+      </div>
+
+    </div><!-- /pw-row -->
+  </div><!-- /pw-content -->
+</div><!-- /pw-screen -->
+
+<script>
+(function() {
+  var screen  = document.getElementById('pw-screen');
+  var input   = document.getElementById('pw-input');
+  var btn     = document.getElementById('pw-btn');
+  var errMsg  = document.getElementById('pw-err-msg');
+  var bride   = document.getElementById('pw-bride');
+  var groom   = document.getElementById('pw-groom');
+
+  /* Skip gate if already authenticated this session */
+  if (sessionStorage.getItem('pw_ok') === '1') {
+    screen.classList.add('pw-gone');
+    return;
+  }
+  document.body.classList.add('pw-locked');
+  input.focus();
+
+  function triggerError() {
+    input.value = '';
+    /* Shake input */
+    input.classList.remove('pw-shake');
+    void input.offsetWidth;
+    input.classList.add('pw-shake');
+    /* Characters react */
+    bride.classList.remove('pw-err'); groom.classList.remove('pw-err');
+    void bride.offsetWidth;
+    bride.classList.add('pw-err'); groom.classList.add('pw-err');
+    /* Error message */
+    errMsg.classList.add('pw-show');
+    /* Clean up after animation */
+    setTimeout(function() {
+      input.classList.remove('pw-shake');
+      bride.classList.remove('pw-err'); groom.classList.remove('pw-err');
+    }, 900);
+    input.focus();
+  }
+
+  function tryUnlock() {
+    if (input.value.trim().toUpperCase() === 'CHRISTOSEBIN') {
+      sessionStorage.setItem('pw_ok', '1');
+      document.body.classList.remove('pw-locked');
+      screen.classList.add('pw-open');
+      setTimeout(function() { screen.classList.add('pw-gone'); }, 900);
+    } else {
+      triggerError();
+    }
+  }
+
+  btn.addEventListener('click', tryUnlock);
+  input.addEventListener('keydown', function(e) {
+    errMsg.classList.remove('pw-show');
+    if (e.key === 'Enter') tryUnlock();
+  });
+})();
+</script>
+
+<!-- ═══════ NAV ═══════ -->
+<nav class="nav">
+  <div class="nav-pill">
+    <a class="nav-logo" href="#">S&amp;C</a>
+    <div class="nav-links">
+      <a href="#details">Travel Logistics</a>
+      <a href="#details">Ceremony</a>
+      <a href="#faq">FAQ</a>
+    </div>
+    <div class="nav-right">
+      <button class="ham-btn" id="ham" aria-label="Toggle Menu" aria-expanded="false" aria-controls="nav-menu">
+        <div class="ham-lines"><span></span><span></span></div>
+      </button>
+    </div>
+    <div class="nav-dropdown" id="nav-menu">
+      <ul>
+        <li><a href="#details">Travel Logistics</a></li>
+        <li><a href="#details">Ceremony</a></li>
+        <li><a href="#faq">FAQ</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<main style="padding-bottom:24px;">
+
+  <!-- ═══════ HERO ═══════ -->
+  <div class="hero-zoom-outer" id="hero-zone">
+  <section class="hero" id="hero-s">
+
+    <!-- ── Shrinking card: image + overlay + text all live inside here ── -->
+    <div class="hero-media" id="hero-media">
+      <img class="hero-img" id="hero-img" src="images/kevin-wedding/hero.png" alt="Sebin &amp; Christo" loading="eager"/>
+      <div class="hero-over" id="hero-over"></div>
+
+      <!-- Text fades as a unit via hero-content opacity (JS-controlled) -->
+      <div class="hero-content" id="hero-content">
+        <!-- Name SVG: CSS entrance slide-up + JS scale on inner wrapper -->
+        <div class="hero-name-wrap" id="hero-name">
+          <div id="hero-name-scale" style="width:100%;transform-origin:bottom center;">
+            <svg class="hero-name-svg" viewBox="0 0 800 160" aria-hidden="true">
+              <text x="50%" y="54%" dominant-baseline="middle" text-anchor="middle"
+                lengthAdjust="spacingAndGlyphs" fill="white"
+                style="font-family:'Instrument Serif',serif;font-style:italic;font-size:140px;">
+                Sebin &amp; Christo
+              </text>
+            </svg>
+          </div>
+        </div>
+        <!-- Scroll bar at the very bottom of the card -->
+        <div class="hero-bar" id="hero-bar">
+          <div class="hero-line"></div>
+          <div class="hero-scroll-row">
+            <svg class="bounce" width="24" height="24" viewBox="0 0 24 24"
+              fill="none" stroke="rgba(255,255,255,0.8)" stroke-width="1"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path d="M7 13l5 5 5-5M12 6v12"/>
+            </svg>
+            <span>Scroll to explore</span>
+          </div>
+        </div>
+      </div><!-- /hero-content -->
+    </div><!-- /hero-media -->
+
+    <!-- ── Breakout photo columns: flanking the hero card, positioned by JS ── -->
+    <!-- Left column: 2 photos, right-aligned, flush against card's left edge -->
+    <div class="bp-col" id="bp-col-left" style="align-items:flex-end;">
+      <div class="bp-card" id="bp0"><img src="images/SC_images/story-1-1.jpeg" alt="" loading="eager"/></div>
+      <div class="bp-card" id="bp1"><img src="images/SC_images/story-1-2.jpeg" alt="" loading="eager"/></div>
+    </div>
+    <!-- Right column: 2 photos, left-aligned, flush against card's right edge -->
+    <div class="bp-col" id="bp-col-right" style="align-items:flex-start;">
+      <div class="bp-card" id="bp2"><img src="images/SC_images/story-1-4.jpeg" alt="" loading="eager"/></div>
+      <div class="bp-card" id="bp3"><img src="images/SC_images/story-1-6.jpeg" alt="" loading="eager"/></div>
+    </div>
+
+  </section>
+  </div><!-- /hero-zone -->
+
+  <!-- ═══════ STORY INTRO ═══════ -->
+  <section class="vision-section">
+    <p class="vision-p medium">
+      <span><span class="vw">you're</span> </span><span><span class="vw">cordially</span> </span><span><span class="vw">invited</span> </span><span><span class="vw">to</span> </span><span><span class="vw">celebrate</span> </span><span><span class="vw">the</span> </span><span><span class="vw">story</span> </span><span><span class="vw">of...</span></span>
+    </p>
+  </section>
+
+  <!-- ═══════ STORY SCROLL ═══════ -->
+  <section id="story" class="story-outer">
+    <div class="story-sticky" id="stk">
+
+      <!-- Title -->
+      <div class="story-title-row">
+        <h2 class="story-title" id="stitle">our story</h2>
+      </div>
+      <br><br><br>
+
+      <!-- DESKTOP CAPTIONS -->
+      <div class="ch-cap" id="dc0">
+        <div class="ch-cap-inner">
+          <div class="ch-cap-left">
+            <h3>chapter one: how we met</h3>
+            <p>We met at university, became fast friends, and eventually realized the best parts of every week were the parts we spent together.</p>
+          </div>
+          <div class="ch-spacer" style="width:389px;"></div>
+          <div class="ch-cap-right"></div>
+        </div>
+      </div>
+      <div class="ch-cap" id="dc1">
+        <div class="ch-cap-inner">
+          <div class="ch-cap-left"></div>
+          <div class="ch-spacer" style="width:458px;"></div>
+          <div class="ch-cap-right">
+            <h3>chapter two: falling in love</h3>
+            <p>Toronto became our home base for late dinners, weekend walks, shared routines, and all of the small moments that made life feel bigger.</p>
+          </div>
+        </div>
+      </div>
+      <div class="ch-cap" id="dc2">
+        <div class="ch-cap-inner">
+          <div class="ch-cap-left">
+            <h3>chapter three: the next step</h3>
+            <p>A trip, a question, a very easy yes, and suddenly the future we had been imagining became something we could invite everyone into.</p>
+          </div>
+          <div class="ch-spacer" style="width:497px;"></div>
+          <div class="ch-cap-right"></div>
+        </div>
+      </div>
+
+      <!-- MOBILE CAPTIONS -->
+      <div class="ch-cap-mob" id="mc0">
+        <h3>chapter one: how we met</h3>
+        <p>We met at university, became fast friends, and eventually realized the best parts of every week were the parts we spent together.</p>
+      </div>
+      <div class="ch-cap-mob" id="mc1">
+        <h3>chapter two: falling in love</h3>
+        <p>Toronto became our home base for late dinners, weekend walks, shared routines, and all of the small moments that made life feel bigger.</p>
+      </div>
+      <div class="ch-cap-mob" id="mc2">
+        <h3>chapter three: the next step</h3>
+        <p>A trip, a question, a very easy yes, and suddenly the future we had been imagining became something we could invite everyone into.</p>
+      </div>
+
+      <!-- POLAROID CARDS (9 total, 3 per chapter) -->
+      <!-- ch1 card 0 -->
+      <div class="pol-card-wrap" id="pc0" style="z-index:1;">
+        <div class="pol-spacer"></div>
+        <div class="pol-outer" style="width:min(389px,85vw);height:min(292px,64vw);">
+          <div class="pol-inner"><div class="pol" style="transform:rotate(-2.5deg);">
+            <div class="pol-photo"><img src="images/SC_images/story-1-1.jpeg" alt="First year on campus" loading="eager"/></div>
+            <p class="pol-caption">The Journey where it all started</p>
+          </div></div>
+        </div>
+        <div class="pol-spacer"></div>
+      </div>
+      <!-- ch1 card 1 -->
+      <div class="pol-card-wrap" id="pc1" style="z-index:2;">
+        <div class="pol-spacer"></div>
+        <div class="pol-outer" style="width:min(292px,64vw);height:min(389px,85vw);">
+          <div class="pol-inner"><div class="pol" style="transform:rotate(1.8deg);">
+            <div class="pol-photo"><img src="images/SC_images/story-1-2.jpeg" alt="Coffee between classes" loading="lazy"/></div>
+            <p class="pol-caption">Our First Image</p>
+          </div></div>
+        </div>
+        <div class="pol-spacer"></div>
+      </div>
+      <!-- ch1 card 2 -->
+      <div class="pol-card-wrap" id="pc2" style="z-index:3;">
+        <div class="pol-spacer"></div>
+        <div class="pol-outer" style="width:min(292px,64vw);height:min(389px,85vw);">
+          <div class="pol-inner"><div class="pol" style="transform:rotate(-1.2deg);">
+            <div class="pol-photo"><img src="images/SC_images/story-1-3.jpeg" alt="The start of everything" loading="lazy"/></div>
+            <p class="pol-caption">Pennukaanal</p>
+          </div></div>
+        </div>
+        <div class="pol-spacer"></div>
+      </div>
+      <!-- ch2 card 0 -->
+      <div class="pol-card-wrap" id="pc3" style="z-index:4;">
+        <div class="pol-spacer"></div>
+        <div class="pol-outer" style="width:min(344px,64vw);height:min(458px,85vw);">
+          <div class="pol-inner"><div class="pol" style="transform:rotate(-2.5deg);">
+            <div class="pol-photo"><img src="images/SC_images/story-1-4.jpeg" alt="A favorite city corner" loading="lazy"/></div>
+            <p class="pol-caption">First Date</p>
+          </div></div>
+        </div>
+        <div class="pol-spacer"></div>
+      </div>
+      <!-- ch2 card 1 -->
+      <div class="pol-card-wrap" id="pc4" style="z-index:5;">
+        <div class="pol-spacer"></div>
+        <div class="pol-outer" style="width:min(344px,64vw);height:min(458px,85vw);">
+          <div class="pol-inner"><div class="pol" style="transform:rotate(1.8deg);">
+            <div class="pol-photo"><img src="images/SC_images/story-1-5.jpeg" alt="Weekends downtown" loading="lazy"/></div>
+            <p class="pol-caption">First Shopping</p>
+          </div></div>
+        </div>
+        <div class="pol-spacer"></div>
+      </div>
+      <!-- ch2 card 2 -->
+      <div class="pol-card-wrap" id="pc5" style="z-index:6;">
+        <div class="pol-spacer"></div>
+        <div class="pol-outer" style="width:min(458px,85vw);height:min(344px,64vw);">
+          <div class="pol-inner"><div class="pol" style="transform:rotate(-1.2deg);">
+            <div class="pol-photo"><img src="images/SC_images/story-1-6.jpeg" alt="Our everyday ritual" loading="lazy"/></div>
+            <p class="pol-caption">First Corniche Drive</p>
+          </div></div>
+        </div>
+        <div class="pol-spacer"></div>
+      </div>
+      <!-- ch3 card 0 -->
+      <div class="pol-card-wrap" id="pc6" style="z-index:7;">
+        <div class="pol-spacer"></div>
+        <div class="pol-outer" style="width:min(497px,85vw);height:min(373px,64vw);">
+          <div class="pol-inner"><div class="pol" style="transform:rotate(-2.5deg);">
+            <div class="pol-photo"><img src="images/SC_images/story-1-7.jpeg" alt="The weekend away" loading="lazy"/></div>
+            <p class="pol-caption">Marriage Fixation</p>
+          </div></div>
+        </div>
+        <div class="pol-spacer"></div>
+      </div>
+      <!-- ch3 card 1 -->
+      <div class="pol-card-wrap" id="pc7" style="z-index:8;">
+        <div class="pol-spacer"></div>
+        <div class="pol-outer" style="width:min(497px,85vw);height:min(373px,64vw);">
+          <div class="pol-inner"><div class="pol" style="transform:rotate(1.8deg);">
+            <div class="pol-photo"><img src="images/SC_images/story-1-8.jpeg" alt="Right after yes" loading="lazy"/></div>
+            <p class="pol-caption">Registration</p>
+          </div></div>
+        </div>
+        <div class="pol-spacer"></div>
+      </div>
+      <!-- ch3 card 2 -->
+      <div class="pol-card-wrap" id="pc8" style="z-index:9;">
+        <div class="pol-spacer"></div>
+        <div class="pol-outer" style="width:min(497px,85vw);height:min(373px,64vw);">
+          <div class="pol-inner"><div class="pol" style="transform:rotate(-1.2deg);">
+            <div class="pol-photo"><img src="images/templates/story-engagement-3.webp" alt="Celebrating together" loading="lazy"/></div>
+            <p class="pol-caption">Celebrating together</p>
+          </div></div>
+        </div>
+        <div class="pol-spacer"></div>
+      </div>
+
+    </div><!-- /story-sticky -->
+  </section>
+
+  <!-- ═══════ LOGISTICS — DATE STICKY ═══════ -->
+  <section style="position:relative;z-index:20;background:var(--bg);">
+    <div class="log-outer">
+      <div class="log-sticky">
+        <p class="log-kicker sr" id="lk">so please join us...</p>
+        <div class="sr" id="ld" style="transition-delay:.2s;width:100%;display:flex;justify-content:center;margin-bottom:56px;">
+          <svg class="log-date-svg" viewBox="0 0 1120 190" aria-hidden="true">
+            <text x="50%" y="54%" dominant-baseline="middle" text-anchor="middle"
+              lengthAdjust="spacingAndGlyphs"
+              style="font-family:'Instrument Serif',serif;font-style:normal;font-size:150px;fill:var(--text);">
+              october 10, 2026
+            </text>
+          </svg>
+        </div>
+        <div class="cd-row sr" id="lc" style="transition-delay:.4s;">
+          <div class="cd-unit"><span class="cd-num" id="cd-d">—</span><span class="cd-label">Days</span></div>
+          <span class="cd-sep">:</span>
+          <div class="cd-unit"><span class="cd-num" id="cd-h">—</span><span class="cd-label">Hours</span></div>
+          <span class="cd-sep">:</span>
+          <div class="cd-unit"><span class="cd-num" id="cd-m">—</span><span class="cd-label">Minutes</span></div>
+          <span class="cd-sep">:</span>
+          <div class="cd-unit"><span class="cd-num" id="cd-s">—</span><span class="cd-label">Seconds</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Venue -->
+    <div class="venue-section">
+      <div class="venue-inner">
+        <div class="venue-img-wrap sr">
+          <img class="venue-img" src="images/templates/venue.png" alt="Cecil Green Park House" loading="lazy"/>
+        </div>
+        <p class="venue-name">Mary Immaculate Church</p>
+        <a class="venue-addr" href="https://maps.app.goo.gl/Wo9dTcVNgSUrxgpr9" target="_blank" rel="noopener noreferrer">
+          Marathakkara, Thrissur, Kerala 680306, India
+        </a>
+        <div class="rsvp-pile" id="rsvp">
+          <a class="rsvp-btn" href="https://maps.app.goo.gl/Wo9dTcVNgSUrxgpr9">Address</a>
+          <!-- <p class="rsvp-by">RSVP by september 1, 2026</p> -->
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════ DETAILS ═══════ -->
+  <section id="details" class="details-section">
+    <div class="details-hd-wrap sr">
+      <h2 class="details-hd">and now some additional details...</h2>
+      <p class="details-sub">The people, places, and practical details that will make the weekend feel effortless.</p>
+    </div>
+    <div class="details-grid">
+      <!-- Wedding Parties -->
+      <button class="d-card" type="button" aria-label="View details for Wedding Parties">
+        <div class="d-card-bg"><img class="d-card-img" src="images/kevin-wedding/details-parties.png" alt="Wedding Parties" loading="lazy"/><div class="d-card-grad"></div></div>
+        <div class="d-card-body"><span class="d-card-title">Wedding Parties</span><span class="d-card-sub">Meet our favorite people.</span></div>
+        <div class="d-card-plus"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
+      </button>
+      <!-- Travel Logistics -->
+      <button class="d-card" type="button" aria-label="View details for Travel Logistics">
+        <div class="d-card-bg"><img class="d-card-img" src="images/templates/details-travel.webp" alt="Travel Logistics" loading="lazy"/><div class="d-card-grad"></div></div>
+        <div class="d-card-body"><span class="d-card-title">Travel Logistics</span><span class="d-card-sub">Plan your trip and stay.</span></div>
+        <div class="d-card-plus"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
+      </button>
+      <!-- Registry -->
+      <button class="d-card" type="button" aria-label="View details for Registry">
+        <div class="d-card-bg"><img class="d-card-img" src="images/kevin-wedding/details-registry.jpg" alt="Registry" loading="lazy"/><div class="d-card-grad"></div></div>
+        <div class="d-card-body"><span class="d-card-title">Ceremony</span><span class="d-card-sub">Your presence is enough, but if you insist...</span></div>
+        <div class="d-card-plus"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
+      </button>
+      <!-- Dress Code
+      <button class="d-card" type="button" aria-label="View details for Dress Code">
+        <div class="d-card-bg"><img class="d-card-img" src="images/templates/details-dresscode.png" alt="Dress Code" loading="lazy"/><div class="d-card-grad"></div></div>
+        <div class="d-card-body"><span class="d-card-title">Dress Code</span><span class="d-card-sub">Summer garden party vibes.</span></div>
+        <div class="d-card-plus"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
+      </button>
+      Dinner Menu
+      <button class="d-card" type="button" aria-label="View details for Dinner Menu">
+        <div class="d-card-bg"><img class="d-card-img" src="images/kevin-wedding/details-dining.png" alt="Dinner Menu" loading="lazy"/><div class="d-card-grad"></div></div>
+        <div class="d-card-body"><span class="d-card-title">Dinner Menu</span><span class="d-card-sub">A quick look at what we are serving.</span></div>
+        <div class="d-card-plus"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
+      </button>
+      Music 
+      <button class="d-card" type="button" aria-label="View details for Music">
+        <div class="d-card-bg"><img class="d-card-img" src="images/kevin-wedding/details-music.jpg" alt="Music" loading="lazy"/><div class="d-card-grad"></div></div>
+        <div class="d-card-body"><span class="d-card-title">Music</span><span class="d-card-sub">Cocktail hour and dance party playlists.</span></div>
+        <div class="d-card-plus"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
+      </button> -->
+    </div>
+  </section>
+
+  <!-- ═══════ VISION ═══════ -->
+  <section class="vision-section" style="padding:128px 24px;">
+    <p class="vision-p large">
+      <span><span class="vw">The</span> </span><span><span class="vw">vision</span> </span><span><span class="vw">for</span> </span><span><span class="vw">the</span> </span><span><span class="vw">day</span> </span><span><span class="vw">is</span> </span><span><span class="vw">simple:</span> </span><span><span class="vw">all</span> </span><span><span class="vw">of</span> </span><span><span class="vw">our</span> </span><span><span class="vw">most</span> </span><span><span class="vw">beloved</span> </span><span><span class="vw">people</span> </span><span><span class="vw">in</span> </span><span><span class="vw">one</span> </span><span><span class="vw">place</span> </span><span><span class="vw">that</span> </span><span><span class="vw">happens</span> </span><span><span class="vw">to</span> </span><span><span class="vw">have</span> </span><span><span class="vw">a</span> </span><span><span class="vw">gorgeous</span> </span><span><span class="vw">garden,</span> </span><span><span class="vw">flowing</span> </span><span><span class="vw">drinks,</span> </span><span><span class="vw">and</span> </span><span><span class="vw">an</span> </span><span><span class="vw">unforgettable</span> </span><span><span class="vw">dance</span> </span><span><span class="vw">floor.</span></span>
+    </p>
+  </section>
+
+  <!-- ═══════ FAQ ═══════ -->
+  <section id="faq" class="faq-section">
+    <div class="faq-inner">
+      <div class="faq-left">
+        <div class="faq-left-inner">
+          <h2 class="faq-hd">Questions and answers</h2>
+          <p class="faq-left-sub">Can't find the answer here?</p>
+          <a class="faq-link" href="https://wa.me/41793242478" target="_blank" rel="noopener noreferrer">Reach out to Sebin or Christo</a>
+        </div>
+      </div>
+      <div class="faq-right">
+        <div class="faq-list">
+
+          <!-- <div class="faq-item">
+            <button class="faq-btn" type="button" aria-expanded="false" onclick="fa(this)">
+              <span class="faq-q">When should I RSVP by?</span>
+              <span class="faq-ico"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg></span>
+            </button>
+            <div class="faq-body"><div class="faq-ans">Please RSVP by September 1, 2026.</div></div>
+          </div> -->
+
+          <div class="faq-item">
+            <button class="faq-btn" type="button" aria-expanded="false" onclick="fa(this)">
+              <span class="faq-q">Is there a dress code?</span>
+              <span class="faq-ico"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg></span>
+            </button>
+            <div class="faq-body"><div class="faq-ans">Yes! We have a theme colour of Olive Green for the lady and Beige for the Men.</div></div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-btn" type="button" aria-expanded="false" onclick="fa(this)">
+              <span class="faq-q">Is the wedding Indoors?</span>
+              <span class="faq-ico"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg></span>
+            </button>
+            <div class="faq-body"><div class="faq-ans">Yes! The ceremony will take place in the church and the reception will take place in the adjacent church hall.</div></div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-btn" type="button" aria-expanded="false" onclick="fa(this)">
+              <span class="faq-q">What will the weather be like? What happens if it rains?</span>
+              <span class="faq-ico"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg></span>
+            </button>
+            <div class="faq-body"><div class="faq-ans">Expect a warm afternoon and a cooler evening.
+
+              The venue is indoors.</div></div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-btn" type="button" aria-expanded="false" onclick="fa(this)">
+              <span class="faq-q">Can I bring a plus one or my kids?</span>
+              <span class="faq-ico"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg></span>
+            </button>
+            <div class="faq-body"><div class="faq-ans">Yes you may bring, but it would be a great support if you could notify us to treat you the best.
+
+            </div></div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-btn" type="button" aria-expanded="false" onclick="fa(this)">
+              <span class="faq-q">What time should I arrive at the ceremony?</span>
+              <span class="faq-ico"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg></span>
+            </button>
+            <div class="faq-body"><div class="faq-ans">Please plan to arrive about 15 minutes before the ceremony begins so everyone has time to get settled.</div></div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-btn" type="button" aria-expanded="false" onclick="fa(this)">
+              <span class="faq-q">I have a food allergy, can I make a special request?</span>
+              <span class="faq-ico"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg></span>
+            </button>
+            <div class="faq-body"><div class="faq-ans">Yes! The servers shall be notified and they shall recommed other alternatives to accomodate your likes.</div></div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-btn" type="button" aria-expanded="false" onclick="fa(this)">
+              <span class="faq-q">Is there parking at the venue?</span>
+              <span class="faq-ico"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg></span>
+            </button>
+            <div class="faq-body"><div class="faq-ans">Yes there is plenty of parking spots available, you may bring you chariots.</div></div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-btn" type="button" aria-expanded="false" onclick="fa(this)">
+              <span class="faq-q">Help! I have other questions!</span>
+              <span class="faq-ico"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg></span>
+            </button>
+            <div class="faq-body"><div class="faq-ans">Please reach out at your-email@example.com with any other questions.
+
+We cannot wait to celebrate with you.</div></div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ═══════ DETAIL PANELS ═══════ -->
+
+<!-- SHARED OVERLAY (single, reused by all panels) -->
+<div id="dp-overlay" class="dp-overlay">
+
+  <!-- ── Wedding Parties ── -->
+  <div class="dp-panel" id="dp-parties">
+    <div class="dp-header">
+      <span class="dp-title">Wedding Parties</span>
+      <button class="dp-close" aria-label="Close"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="1" y1="1" x2="11" y2="11"/><line x1="11" y1="1" x2="1" y2="11"/></svg></button>
+    </div>
+    <div class="dp-body">
+      <div class="dp-section">
+        <p class="dp-section-label">Bride's Side</p>
+        <div class="dp-party-grid">
+          <div class="dp-person"><div class="dp-person-avatar"><div class="dp-person-initials">A</div></div><p class="dp-person-name">Alexandra</p><p class="dp-person-role">Maid of Honor</p></div>
+          <div class="dp-person"><div class="dp-person-avatar"><div class="dp-person-initials">M</div></div><p class="dp-person-name">Michelle</p><p class="dp-person-role">Bridesmaid</p></div>
+          <div class="dp-person"><div class="dp-person-avatar"><div class="dp-person-initials">P</div></div><p class="dp-person-name">Priya</p><p class="dp-person-role">Bridesmaid</p></div>
+          <div class="dp-person"><div class="dp-person-avatar"><div class="dp-person-initials">R</div></div><p class="dp-person-name">Rachel</p><p class="dp-person-role">Bridesmaid</p></div>
+        </div>
+      </div>
+      <div class="dp-divider"></div>
+      <div class="dp-section">
+        <p class="dp-section-label">Groom's Side</p>
+        <div class="dp-party-grid">
+          <div class="dp-person"><div class="dp-person-avatar"><div class="dp-person-initials">D</div></div><p class="dp-person-name">Daniel</p><p class="dp-person-role">Best Man</p></div>
+          <div class="dp-person"><div class="dp-person-avatar"><div class="dp-person-initials">J</div></div><p class="dp-person-name">James</p><p class="dp-person-role">Groomsman</p></div>
+          <div class="dp-person"><div class="dp-person-avatar"><div class="dp-person-initials">T</div></div><p class="dp-person-name">Thomas</p><p class="dp-person-role">Groomsman</p></div>
+          <div class="dp-person"><div class="dp-person-avatar"><div class="dp-person-initials">N</div></div><p class="dp-person-name">Nathan</p><p class="dp-person-role">Groomsman</p></div>
+        </div>
+      </div>
+      <div class="dp-divider"></div>
+      <div class="dp-note">We are so grateful for every one of these people. They have been by our side through everything — and we couldn't imagine celebrating without them.</div>
+    </div>
+  </div>
+
+  <!-- ── Travel Logistics ── -->
+  <div class="dp-panel" id="dp-travel">
+    <div class="dp-header">
+      <span class="dp-title">Travel Logistics</span>
+      <button class="dp-close" aria-label="Close"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="1" y1="1" x2="11" y2="11"/><line x1="11" y1="1" x2="1" y2="11"/></svg></button>
+    </div>
+    <div class="dp-body">
+      <div class="dp-section">
+        <p class="dp-section-label">Getting There</p>
+        <div class="dp-info-row">
+          <div class="dp-info-icon"><svg fill="#000000" width="800px" height="800px" viewBox="-2.5 0 19 19" xmlns="http://www.w3.org/2000/svg" class="cf-icon-svg"><path d="M12.382 5.304 10.096 7.59l.006.02L11.838 14a.908.908 0 0 1-.211.794l-.573.573a.339.339 0 0 1-.566-.08l-2.348-4.25-.745-.746-1.97 1.97a3.311 3.311 0 0 1-.75.504l.44 1.447a.875.875 0 0 1-.199.79l-.175.176a.477.477 0 0 1-.672 0l-1.04-1.039-.018-.02-.788-.786-.02-.02-1.038-1.039a.477.477 0 0 1 0-.672l.176-.176a.875.875 0 0 1 .79-.197l1.447.438a3.322 3.322 0 0 1 .504-.75l1.97-1.97-.746-.744-4.25-2.348a.339.339 0 0 1-.08-.566l.573-.573a.909.909 0 0 1 .794-.211l6.39 1.736.02.006 2.286-2.286c.37-.372 1.621-1.02 1.993-.65.37.372-.279 1.622-.65 1.993z"/></svg>
+          </div>
+          <div class="dp-info-text"><p class="dp-info-title">By Air</p><p class="dp-info-desc">Fly into the Kochin international airport(COK). We recommend booking early as flights fill quickly around the wedding date.</p></div>
+        </div>
+        <div class="dp-info-row">
+          <div class="dp-info-icon"><svg width="800px" height="800px" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="iconify iconify--gis" preserveAspectRatio="xMidYMid meet"><path d="M49.368 11.228c-11.646-.171-27.826.079-31.156 9.027l-8.184 19.204a2.85 2.85 0 0 0-1.37-.865l-3.296-.927a2.86 2.86 0 0 0-3.534 1.983l-1.72 6.104a2.86 2.86 0 0 0 1.983 3.535l3.297.927c.11.03.22.04.33.059c-.63 1.569-1.023 3.295-1.023 4.322v22.32c0 1.145.48 1.674 1.243 1.922v5.947a4.008 4.008 0 0 0 4.017 4.017H20.73a4.008 4.008 0 0 0 4.017-4.017v-5.729h50.504v5.729a4.01 4.01 0 0 0 4.018 4.017h10.775a4.01 4.01 0 0 0 4.019-4.017v-5.947c.763-.248 1.24-.777 1.24-1.922v-22.32c0-1.027-.393-2.753-1.022-4.322c.11-.018.22-.028.33-.06l3.297-.926a2.86 2.86 0 0 0 1.982-3.535l-1.717-6.104a2.861 2.861 0 0 0-3.536-1.983l-3.295.927a2.855 2.855 0 0 0-1.37.865l-8.185-19.204c-3.57-9.084-20.773-8.856-32.42-9.027zm33.358 29.444c.194.576-.386.96-.993.995c0 0-1.984.168-4.72.389c-2.082-4.864-6.92-8.292-12.525-8.292c-6.151 0-11.373 4.13-13.048 9.754c-.464.006-1.003.026-1.435.026c-10.596 0-31.738-1.877-31.738-1.877c-.607-.036-1.187-.419-.993-.995c8.142-24.821 8.385-22.955 32.275-22.694c23.891.26 24.03-1.513 33.177 22.694zm-18.238-2.217a8.886 8.886 0 0 1 7.447 3.991c-4.785.356-10.292.719-15.424.93a8.879 8.879 0 0 1 7.977-4.921zM9.407 46.511c.072.106.142.213.221.317h-.31zm5.294 6.234c2.096-.035 13.348 3.753 13.348 3.753c1.405.395 2.642 3.051 2.635 4.511c-.021 4.917-12.71 3.21-17.86 3.23a2.63 2.63 0 0 1-2.635-2.634V55.38c0-1.46 2.416-2.6 4.512-2.635zm70.598 0c2.096.034 4.512 1.175 4.512 2.635v6.225a2.63 2.63 0 0 1-2.635 2.635c-5.15-.02-17.839 1.686-17.86-3.23c-.007-1.46 1.23-4.117 2.635-4.512c0 0 11.252-3.788 13.348-3.753z" fill="#000000"></path></svg>
+          </div>
+          <div class="dp-info-text"><p class="dp-info-title">By Car</p><p class="dp-info-desc">Parking is available at Mary Immaculate Church. We suggest carpooling with guests from the same area.</p><a class="dp-info-link" href="https://maps.app.goo.gl/Wo9dTcVNgSUrxgpr9" target="_blank" rel="noopener">Get Directions →</a></div>
+        </div>
+        <div class="dp-info-row">
+          <div class="dp-info-icon"><svg width="800px" height="800px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M8 14V15M16 14V15M5 11H12M19 11H12M6 21L8 18M16 18L18 21M12 6V11M12 6H5M12 6H19M5 6V16C5 17.1046 5.89543 18 7 18H17C18.1046 18 19 17.1046 19 16V6M5 6V6C5 4.34315 6.34315 3 8 3H16C17.6569 3 19 4.34315 19 6V6" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg></div>
+          <div class="dp-info-text"><p class="dp-info-title">By Train</p><p class="dp-info-desc">Nearest train station is Thrissur. An uber can be called from Thrissur railway station.</p></div>
+        </div>
+        <div class="dp-info-row">
+          <div class="dp-info-icon"><svg width="800px" height="800px" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path
+                fill-rule="evenodd"
+                clip-rule="evenodd"
+                d="M7.50009 0.877014C3.84241 0.877014 0.877258 3.84216 0.877258 7.49984C0.877258 11.1575 3.8424 14.1227 7.50009 14.1227C11.1578 14.1227 14.1229 11.1575 14.1229 7.49984C14.1229 3.84216 11.1577 0.877014 7.50009 0.877014ZM1.82726 7.49984C1.82726 4.36683 4.36708 1.82701 7.50009 1.82701C10.6331 1.82701 13.1729 4.36683 13.1729 7.49984C13.1729 10.6328 10.6331 13.1727 7.50009 13.1727C4.36708 13.1727 1.82726 10.6328 1.82726 7.49984ZM8 4.50001C8 4.22387 7.77614 4.00001 7.5 4.00001C7.22386 4.00001 7 4.22387 7 4.50001V7.50001C7 7.63262 7.05268 7.7598 7.14645 7.85357L9.14645 9.85357C9.34171 10.0488 9.65829 10.0488 9.85355 9.85357C10.0488 9.65831 10.0488 9.34172 9.85355 9.14646L8 7.29291V4.50001Z"
+                fill="#000000"
+              />
+            </svg>
+            </div>
+          <div class="dp-info-text"><p class="dp-info-title">Ceremony Time</p><p class="dp-info-desc">Church Doors open at 11:00 AM. Please arrive at least 15 minutes early to be seated before the ceremony begins at 11:30 AM.</p></div>
+        </div>
+      </div>
+      <div class="dp-divider"></div>
+      <div class="dp-section">
+        <p class="dp-section-label">Where to Stay</p>
+        <div class="dp-hotel">
+          <p class="dp-hotel-name">Park Residency</p>
+          <p class="dp-hotel-dist">~10 min from the venue</p>
+          <!-- Use code SEBINCHRISTO for a group rate -->
+          <a class="dp-hotel-link" href="https://maps.app.goo.gl/hGsFgddQ4eJ81opYA" target="_blank" rel="noopener">Book Now →</a>
+        </div>
+        <div class="dp-hotel">
+          <p class="dp-hotel-name">Joys Palace</p>
+          <p class="dp-hotel-dist">~15 min from the venue</p>
+          <a class="dp-hotel-link" href="https://maps.app.goo.gl/7PRDhxPrkQDVJjKp6" target="_blank" rel="noopener">Book Now →</a>
+        </div>
+      </div>
+      <div class="dp-note">Have questions about getting here or where to stay? Feel free to reach out — we're happy to help.</div>
+    </div>
+  </div>
+
+  <!-- ── Registry ── -->
+  <div class="dp-panel" id="dp-registry">
+    <div class="dp-header">
+      <span class="dp-title">Ceremony</span>
+      <button class="dp-close" aria-label="Close"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="1" y1="1" x2="11" y2="11"/><line x1="11" y1="1" x2="1" y2="11"/></svg></button>
+    </div>
+    <div class="dp-body">
+      <p style="font-size:.95rem;color:var(--muted);line-height:1.6;margin-bottom:28px;">Your presence is the greatest gift of all. To help you settle in and enjoy the festivities, here is a brief look at how we will be celebrating our union from the first "I do" to the first meal.
+        <br>
+        We invite you to join us as we celebrate our love.
+      </p>
+      <div class="dp-section">
+        <p class="dp-section-label">Ceremony</p>
+        <div class="dp-reg-card">
+          <div class="dp-reg-icon">💍</div>
+          <div class="dp-reg-text"><p class="dp-reg-name">11:30 AM The Nuptial Mass</p><p class="dp-reg-desc">St. Mary’s Catholic Church</p></div>
+          <!-- <a class="dp-reg-btn" href="https://www.amazon.com/wedding" target="_blank" rel="noopener">View →</a> -->
+        </div>
+        <div class="dp-reg-card">
+          <div class="dp-reg-icon">📸</div>
+          <div class="dp-reg-text"><p class="dp-reg-name">01:00 PM To the Gardens</p><p class="dp-reg-desc">Photos with family and friends</p></div>
+          <!-- <a class="dp-reg-btn" href="https://www.zola.com" target="_blank" rel="noopener">View →</a> -->
+        </div>
+        <div class="dp-reg-card">
+          <div class="dp-reg-icon">🍽️</div>
+          <div class="dp-reg-text"><p class="dp-reg-name">01:30 PM The Celebration Continues</p><p class="dp-reg-desc">A luncheon will be served at the Grand Hall</p></div>
+          <!-- <a class="dp-reg-btn" href="#" target="_blank" rel="noopener">Contribute →</a> -->
+        </div>
+      </div>
+      <div class="dp-note">Please do not feel any obligation to give a gift. We are simply grateful you are celebrating with us.</div>
+    </div>
+  </div>
+
+  <!-- ── Dress Code ── -->
+  <div class="dp-panel" id="dp-dresscode">
+    <div class="dp-header">
+      <span class="dp-title">Dress Code</span>
+      <button class="dp-close" aria-label="Close"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="1" y1="1" x2="11" y2="11"/><line x1="11" y1="1" x2="1" y2="11"/></svg></button>
+    </div>
+    <div class="dp-body">
+      <div class="dp-section">
+        <p class="dp-section-label">Dress Code</p>
+        <div class="dp-info-row" style="border-bottom:none;padding-bottom:0;">
+          <div class="dp-info-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M20.38 3.46L16 2a4 4 0 01-8 0L3.62 3.46a2 2 0 00-1.34 2.23l.58 3.57a1 1 0 00.99.84H6v10c0 1.1.9 2 2 2h8a2 2 0 002-2V10h2.15a1 1 0 00.99-.84l.58-3.57a2 2 0 00-1.34-2.23z"/></svg></div>
+          <div class="dp-info-text"><p class="dp-info-title">Garden Party Formal</p><p class="dp-info-desc">Think elegant but relaxed — florals, pastels, and breathable fabrics are welcome. Suits and ties for the gentlemen, cocktail dresses or jumpsuits for the ladies.</p></div>
+        </div>
+      </div>
+      <div class="dp-divider"></div>
+      <div class="dp-section">
+        <p class="dp-section-label">Suggested Palette</p>
+        <div class="dp-swatch-row">
+          <div class="dp-swatch"><div class="dp-swatch-dot" style="background:#d4c5a9;"></div><span class="dp-swatch-label">Champagne</span></div>
+          <div class="dp-swatch"><div class="dp-swatch-dot" style="background:#b5c8b8;"></div><span class="dp-swatch-label">Sage</span></div>
+          <div class="dp-swatch"><div class="dp-swatch-dot" style="background:#c9a990;"></div><span class="dp-swatch-label">Terracotta</span></div>
+          <div class="dp-swatch"><div class="dp-swatch-dot" style="background:#e8ddd0;"></div><span class="dp-swatch-label">Linen</span></div>
+          <div class="dp-swatch"><div class="dp-swatch-dot" style="background:#8a7968;"></div><span class="dp-swatch-label">Mocha</span></div>
+        </div>
+      </div>
+      <div class="dp-divider"></div>
+      <div class="dp-note">Please avoid wearing all white or ivory out of respect for the bride. Comfortable shoes are encouraged — the venue has beautiful grounds perfect for wandering.</div>
+    </div>
+  </div>
+
+  <!-- ── Dinner Menu ── -->
+  <div class="dp-panel" id="dp-menu">
+    <div class="dp-header">
+      <span class="dp-title">Dinner Menu</span>
+      <button class="dp-close" aria-label="Close"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="1" y1="1" x2="11" y2="11"/><line x1="11" y1="1" x2="1" y2="11"/></svg></button>
+    </div>
+    <div class="dp-body">
+      <div class="dp-menu-group">
+        <p class="dp-menu-course">Starters</p>
+        <div class="dp-menu-item"><span class="dp-menu-name">Seasonal Garden Salad</span><span class="dp-menu-note">V · GF</span></div>
+        <div class="dp-menu-item"><span class="dp-menu-name">Roasted Tomato Soup</span><span class="dp-menu-note">V</span></div>
+        <div class="dp-menu-item"><span class="dp-menu-name">Charcuterie &amp; Artisan Bread</span><span class="dp-menu-note"></span></div>
+      </div>
+      <div class="dp-menu-group">
+        <p class="dp-menu-course">Mains</p>
+        <div class="dp-menu-item"><span class="dp-menu-name">Pan-Seared Chicken Breast</span><span class="dp-menu-note">GF</span></div>
+        <div class="dp-menu-item"><span class="dp-menu-name">Grilled Salmon with Herb Butter</span><span class="dp-menu-note">GF</span></div>
+        <div class="dp-menu-item"><span class="dp-menu-name">Wild Mushroom Risotto</span><span class="dp-menu-note">V · GF</span></div>
+      </div>
+      <div class="dp-menu-group">
+        <p class="dp-menu-course">Dessert</p>
+        <div class="dp-menu-item"><span class="dp-menu-name">Wedding Cake</span><span class="dp-menu-note">Vanilla &amp; Berry</span></div>
+        <div class="dp-menu-item"><span class="dp-menu-name">Petit Fours Selection</span><span class="dp-menu-note"></span></div>
+      </div>
+      <div class="dp-note">V = Vegetarian · GF = Gluten Free. Please let us know of any dietary requirements when you RSVP and we will do our best to accommodate you.</div>
+    </div>
+  </div>
+
+  <!-- ── Music ── -->
+  <div class="dp-panel" id="dp-music">
+    <div class="dp-header">
+      <span class="dp-title">Music</span>
+      <button class="dp-close" aria-label="Close"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="1" y1="1" x2="11" y2="11"/><line x1="11" y1="1" x2="1" y2="11"/></svg></button>
+    </div>
+    <div class="dp-body">
+      <p style="font-size:.95rem;color:var(--muted);line-height:1.6;margin-bottom:28px;">Music sets the mood. Here's a peek at what we'll be playing to make the night unforgettable.</p>
+      <div class="dp-section">
+        <p class="dp-section-label">Our Playlists</p>
+        <a class="dp-playlist" href="#" target="_blank" rel="noopener">
+          <div class="dp-playlist-icon" style="background:#1DB954;">🎵</div>
+          <div class="dp-playlist-info"><p class="dp-playlist-name">Cocktail Hour</p><p class="dp-playlist-desc">Soft jazz, acoustic &amp; easy listening</p></div>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--muted)" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+        <a class="dp-playlist" href="#" target="_blank" rel="noopener">
+          <div class="dp-playlist-icon" style="background:#E91429;">🎶</div>
+          <div class="dp-playlist-info"><p class="dp-playlist-name">Dinner</p><p class="dp-playlist-desc">Ambient, romantic &amp; timeless classics</p></div>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--muted)" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+        <a class="dp-playlist" href="#" target="_blank" rel="noopener">
+          <div class="dp-playlist-icon" style="background:#7C3AED;">🎉</div>
+          <div class="dp-playlist-info"><p class="dp-playlist-name">Dance Floor</p><p class="dp-playlist-desc">High energy hits to keep you moving</p></div>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--muted)" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+      <div class="dp-divider"></div>
+      <div class="dp-note">Have a song request? Drop it in your RSVP and we'll do our best to add it to the playlist!</div>
+    </div>
+  </div>
+
+</div><!-- /dp-overlay -->
+
+<!-- ═══════ LIGHTBOX ═══════ -->
+<div id="lightbox" class="lb-overlay" role="dialog" aria-modal="true" aria-label="Photo">
+  <div class="lb-card" id="lb-card">
+    <div class="lb-photo-wrap">
+      <img class="lb-img" id="lb-img" src="" alt=""/>
+      <button class="lb-close" id="lb-close" aria-label="Close">
+        <svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+          <line x1="1" y1="1" x2="9" y2="9"/><line x1="9" y1="1" x2="1" y2="9"/>
+        </svg>
+      </button>
+    </div>
+    <p class="lb-caption" id="lb-caption"></p>
+  </div>
+</div>
+
+<!-- ═══════ FOOTER ═══════ -->
+<section class="site-footer">
+  <div class="footer-inner">
+    <img class="footer-img" src="images/SC_images/Footer.jpeg" alt="Closing photo"/>
+    <div class="footer-over"></div>
+    <div class="footer-content">
+      <h2 class="footer-quote">you're my favorite person to do anything with for the rest of my life.</h2>
+    </div>
+  </div>
+</section>
+
+<script>
+(function() {
+  /* ─ Nav hamburger ─ */
+  var ham = document.getElementById('ham');
+  var menu = document.getElementById('nav-menu');
+  var open = false;
+  ham.addEventListener('click', function(e) {
+    e.stopPropagation();
+    open = !open;
+    ham.setAttribute('aria-expanded', String(open));
+    menu.classList.toggle('open', open);
+  });
+  document.addEventListener('click', function() {
+    if (open) { open = false; ham.setAttribute('aria-expanded','false'); menu.classList.remove('open'); }
+  });
+
+  /* ─ Countdown ─ */
+  var target = new Date('2026-10-10T16:00:00');
+  function pad(n) { return String(n).padStart(2,'0'); }
+  function tick() {
+    var diff = Math.max(0, target - new Date());
+    document.getElementById('cd-d').textContent = Math.floor(diff/86400000);
+    document.getElementById('cd-h').textContent = pad(Math.floor(diff%86400000/3600000));
+    document.getElementById('cd-m').textContent = pad(Math.floor(diff%3600000/60000));
+    document.getElementById('cd-s').textContent = pad(Math.floor(diff%60000/1000));
+  }
+  tick(); setInterval(tick, 1000);
+
+  /* ─ FAQ ─ */
+  window.fa = function(btn) {
+    var body = btn.nextElementSibling;
+    var was = btn.getAttribute('aria-expanded') === 'true';
+    document.querySelectorAll('.faq-btn[aria-expanded="true"]').forEach(function(b) {
+      b.setAttribute('aria-expanded','false');
+      b.nextElementSibling.classList.remove('open');
+    });
+    if (!was) { btn.setAttribute('aria-expanded','true'); body.classList.add('open'); }
+  };
+
+  /* ─── UTILITIES ─── */
+  function clamp(v, lo, hi) { return Math.max(lo, Math.min(hi, v)); }
+  function easeOutCubic(t)  { return 1 - Math.pow(1 - t, 3); }
+  function easeOutPow5(t)   { return 1 - Math.pow(1 - t, 5); }
+
+  /* ─── HERO SCROLL ZOOM ───
+     Exact port of cordially.io:
+       scrollProgress = clamp(scrollY/1200, 0,1)
+       b = clamp(scrollY/864, 0,1)   ← hero card done shrinking at 864px scroll
+       textScale = 1 - 0.12*b        ← applied to name-scale wrapper
+       textOpacity = clamp(1-1.45*b) ← applied to hero-content (fades both name+bar)
+       overlayOpacity = clamp(0.22 - 0.20*b, 0.02, 0.22)
+       borderRadius: 18→46 px
+       translateY: 0→12px (subtle downward drift)
+       corner photos: power-5 ease, fly in from ±vw/2 + 400px below
+  ─── */
+  var hEl        = document.getElementById('hero-s');
+  var hMedia     = document.getElementById('hero-media');
+  var hContent   = document.getElementById('hero-content');    /* textOpacity target */
+  var hName      = document.getElementById('hero-name');       /* nameSlideUp CSS anim */
+  var hNameScale = document.getElementById('hero-name-scale'); /* textScale target */
+  var hOver      = document.getElementById('hero-over');
+
+  /* Breakout photo columns — exact port of cordially.io's C() function */
+  var bpColLeft  = document.getElementById('bp-col-left');
+  var bpColRight = document.getElementById('bp-col-right');
+  var bpCards    = [0,1,2,3].map(function(i){ return document.getElementById('bp'+i); });
+
+  var heroRaf  = null;
+  /* After nameSlideUp finishes (~1.7s) we can safely set transform on hero-name-wrap */
+  var nameAnimDone = false;
+  setTimeout(function(){ nameAnimDone = true; }, 1800);
+
+  function getVW() { return window.innerWidth; }
+  function getVH() { return window.innerHeight; }
+
+  function setCardSize(vw, vh, b) {
+    var isDesk = vw >= 768;
+    var startW = 0.97 * vw;
+    var startH = 0.97 * vh;
+    if (isDesk) {
+      var targetW = Math.min(Math.max(0.46 * vw, 380), 560);
+      var targetH = Math.min(Math.max(0.80 * vh, 520), 760);
+      hMedia.style.width        = (startW - (startW - targetW) * b) + 'px';
+      hMedia.style.height       = (startH - (startH - targetH) * b) + 'px';
+      hMedia.style.borderRadius = (18 + 28 * b) + 'px';
+      hMedia.style.transform    = 'translateY(' + (12 * b) + 'px)';
+    } else {
+      hMedia.style.width        = (vw - 24) + 'px';
+      hMedia.style.height       = vh + 'px';
+      hMedia.style.borderRadius = '24px';
+      hMedia.style.transform    = '';
+    }
+  }
+
+  /* Set initial card size immediately (b=0 = no scroll) to avoid flash */
+  setCardSize(getVW(), getVH(), 0);
+  window.addEventListener('resize', function() { updateHeroZoom(); }, {passive:true});
+
+  function updateHeroZoom() {
+    var scrollY = window.scrollY;
+    var vw = getVW(); var vh = getVH();
+    var isDesk = vw >= 768;
+    var scrollProgress = clamp(scrollY / 1200, 0, 1);
+    var b = isDesk ? clamp(scrollY / 864, 0, 1) : 0;
+
+    /* Card dimensions, border-radius, translateY */
+    setCardSize(vw, vh, b);
+
+    /* Overlay lightens as card shrinks (0.22 → 0.02) */
+    if (hOver) hOver.style.background = 'rgba(0,0,0,' + clamp(0.22 - 0.20 * b, 0.02, 0.22) + ')';
+
+    /* Text group fades out — only after very first scroll to not break CSS entrance anim */
+    if (b > 0.005 && hContent) {
+      hContent.style.opacity = String(clamp(1 - 1.45 * b, 0, 1));
+    }
+
+    /* textScale on the inner name wrapper (separate element from nameSlideUp CSS anim) */
+    if (hNameScale) {
+      hNameScale.style.transform = 'scale(' + (1 - 0.12 * b) + ')';
+    }
+
+    /* ── Breakout photo columns: exact port of cordially.io C() layout function ──
+       Two flanking columns of 2 photos each. Positions calculated from the
+       final (fully-shrunk) card dimensions so columns are always flush to card edges.
+       Animation: power-5 ease-out staggered fly-in from ±vw/2 + 400px below.
+    ── */
+    updateBreakout(vw, vh, scrollProgress);
+  }
+
+  /* Exact port of cordially.io's breakout photo layout + animation function */
+  function updateBreakout(vw, vh, scrollProgress) {
+    if (!bpColLeft || !bpColRight || vw < 768) return;
+
+    /* power-5 ease-out from scrollProgress, then per-card progress with stagger */
+    var r5 = easeOutPow5(scrollProgress);
+    function lv(off) { return off >= 1 ? 0 : clamp((r5 - off) / (1 - off), 0, 1); }
+
+    var halfVw  = vw / 2;
+    var targetW = Math.min(Math.max(0.46 * vw, 380), 560);  /* final card width */
+    var targetH = Math.min(Math.max(0.80 * vh, 520), 760);  /* final card height */
+    var sideSpace = (vw - targetW) / 2;                      /* space on each side of card */
+    /* colW: 23% of viewport, clamped by available side space */
+    var colW    = Math.min(Math.max(0.23 * vw, 210), Math.max(sideSpace - 34, 0));
+    if (colW < 140) { bpColLeft.style.visibility='hidden'; bpColRight.style.visibility='hidden'; return; }
+
+    var smallW  = Math.max(Math.min(0.78 * colW, colW - 28), 160);  /* narrower card */
+    var topSpace = (vh - targetH) / 2;                                /* vertical margin above/below card */
+
+    /* Photo heights based on final card height */
+    var ph0 = Math.min(Math.max(0.48 * targetH, 260), 360);  /* left-top:  tall   */
+    var ph1 = Math.min(Math.max(0.28 * targetH, 160), 240);  /* left-bot:  short  */
+    var ph2 = Math.min(Math.max(0.48 * targetH, 380), 380);  /* right-top: portrait */
+    var ph3 = Math.min(Math.max(0.48 * targetH, 260), 360);  /* right-bot: tall   */
+
+    /* heroCenterOffset: half the final card width + 10px gap */
+    var hco      = targetW / 2 + 10;
+    var leftTop  = Math.max(topSpace - 60, 8);
+    var rightTop = Math.max(Math.min(topSpace + targetH + 100, vh - 24) - (ph2 + ph3 + 10), 8);
+
+    /* Position left column: right edge = 50% + hco (left of card center) */
+    bpColLeft.style.visibility = 'visible';
+    bpColLeft.style.top   = leftTop + 'px';
+    bpColLeft.style.right = 'calc(50% + ' + hco + 'px)';
+    bpColLeft.style.left  = 'auto';
+    bpColLeft.style.width = colW + 'px';
+
+    /* Position right column: left edge = 50% + hco (right of card center) */
+    bpColRight.style.visibility = 'visible';
+    bpColRight.style.top  = rightTop + 'px';
+    bpColRight.style.left = 'calc(50% + ' + hco + 'px)';
+    bpColRight.style.right = 'auto';
+    bpColRight.style.width = colW + 'px';
+
+    /* Animate each card: [left-top, left-bot, right-top, right-bot] */
+    var cards = [
+      { w: colW,   h: ph0, off: 0,    dir: -1, br: 26 },  /* left-top */
+      { w: smallW, h: ph1, off: 0.30, dir: -1, br: 22 },  /* left-bot */
+      { w: colW,   h: ph2, off: 0.40, dir:  1, br: 24 },  /* right-top: portrait */
+      { w: colW,   h: ph3, off: 0.75, dir:  1, br: 28 }   /* right-bot */
+    ];
+    cards.forEach(function(cd, i) {
+      var el = bpCards[i]; if (!el) return;
+      var p  = lv(cd.off);
+      var tx = cd.dir * halfVw * (1 - p);  /* fly from ±vw/2 */
+      var ty = 400 * (1 - p);              /* fly from 400px below */
+      var sc = 0.96 + 0.04 * p;
+      el.style.width        = cd.w + 'px';
+      el.style.height       = cd.h + 'px';
+      el.style.borderRadius = cd.br + 'px';
+      el.style.transform    = 'translateX('+tx+'px) translateY('+ty+'px) scale('+sc+')';
+    });
+  }
+
+  window.addEventListener('scroll', function() {
+    if (heroRaf) return;
+    heroRaf = requestAnimationFrame(function(){ updateHeroZoom(); heroRaf = null; });
+  }, {passive: true});
+  updateHeroZoom();
+
+  /* ─── STORY SCROLL ───
+     V  = 50% of viewport height  (scroll step per card)
+     B  = 20px stacking compression per overlapping card
+     r  = scroll distance into story section
+     Each card i: translateY = max(i*V - r, 0) - sOver*B
+       Front card (i=8, sOver=0) always lands at CSS top.
+       Earlier cards stack upward (negative ty), peeking from above the front card.
+  ─── */
+  var storyOuter = document.getElementById('story');
+  var storyTitle = document.getElementById('stitle');
+  var pcs = Array.from({length:9}, function(_,i){ return document.getElementById('pc'+i); });
+  var dcs = Array.from({length:3}, function(_,i){ return document.getElementById('dc'+i); });
+  var mcs = Array.from({length:3}, function(_,i){ return document.getElementById('mc'+i); });
+
+  /* Caption groups: index of the first card in each chapter */
+  var CAP_STARTS = [0, 3, 6];
+  var storyRaf = null;
+  var titleShown = false;
+
+  function updateStory() {
+    if (!storyOuter) return;
+    var rect = storyOuter.getBoundingClientRect();
+    /* bail early if section is completely off screen */
+    if (rect.bottom < -window.innerHeight || rect.top > 1.5 * window.innerHeight) return;
+
+    var r  = Math.max(0, -rect.top);
+    var V  = 0.5 * window.innerHeight;  /* 50vh per card step */
+    var B  = window.innerWidth >= 768 ? 20 : 0; /* no upward stack on mobile */
+
+    /* ── Story title slides in once ── */
+    if (!titleShown && r > 40) {
+      titleShown = true;
+      storyTitle.style.opacity   = '0.28';
+      storyTitle.style.transform = 'translateY(0)';
+    }
+
+    /* ── Position each polaroid card ──
+       ty = dist - sOver*B:
+         dist   → remaining queue distance (card slides down from above into position)
+         sOver  → count of later cards already overlapping × B compression
+       Front card (a=8, sOver=0) always lands at CSS top (ty=0).
+       Earlier cards stack upward (negative ty) so they peek from above the front card.
+    ── */
+    for (var a = 0; a < 9; a++) {
+      var pc = pcs[a];
+      if (!pc) continue;
+      var dist = Math.max(a * V - r, 0);
+      var sOver = 0;
+      for (var ee = a + 1; ee < 9; ee++) {
+        sOver += clamp((r - (ee * V - 140)) / 140, 0, 1);
+      }
+      var ty = dist - sOver * B;
+      pc.style.opacity   = '1';
+      pc.style.transform = 'translate3d(0,' + ty + 'px,0)';
+    }
+
+    /* ── Captions: smooth fade-in / fade-out ── */
+    for (var ci = 0; ci < 3; ci++) {
+      var startR  = CAP_STARTS[ci] * V;
+      var nextR   = ci < 2 ? CAP_STARTS[ci + 1] * V : Infinity;
+      var fadeIn  = clamp((r - (startR - 260)) / 260, 0, 1);
+      var fadeOut = 1;
+      if (isFinite(nextR)) {
+        var distToNext = nextR - r;
+        if (distToNext < 600) fadeOut = clamp(distToNext / 600, 0, 1);
+      }
+      var capOpacity = fadeIn * fadeOut;
+      var capTy = (1 - fadeIn) * 24 - (1 - fadeOut) * 40;
+      var transform3d = 'translate3d(0,' + capTy + 'px,0)';
+      if (dcs[ci]) { dcs[ci].style.opacity = capOpacity; dcs[ci].style.transform = transform3d; }
+      if (mcs[ci]) { mcs[ci].style.opacity = capOpacity; mcs[ci].style.transform = transform3d; }
+    }
+  }
+
+  window.addEventListener('scroll', function() {
+    if (storyRaf) return;
+    storyRaf = requestAnimationFrame(function() { updateStory(); storyRaf = null; });
+  }, {passive: true});
+  updateStory();
+
+  /* ─── VISION word reveal ─── */
+  var vObs = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (!entry.isIntersecting) return;
+      var words = entry.target.querySelectorAll('.vw');
+      words.forEach(function(w, i) {
+        setTimeout(function(){ w.classList.add('lit'); }, i * 60);
+      });
+      vObs.unobserve(entry.target);
+    });
+  }, {threshold: 0.2});
+  document.querySelectorAll('.vision-p').forEach(function(p){ vObs.observe(p); });
+
+  /* ─── Generic scroll reveal ─── */
+  var srObs = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) { entry.target.classList.add('on'); srObs.unobserve(entry.target); }
+    });
+  }, {threshold: 0.1, rootMargin: '0px 0px -40px 0px'});
+  document.querySelectorAll('.sr').forEach(function(el){ srObs.observe(el); });
+
+  /* ─── LIGHTBOX ─── */
+  var lbOverlay = document.getElementById('lightbox');
+  var lbImg     = document.getElementById('lb-img');
+  var lbCap     = document.getElementById('lb-caption');
+  var lbClose   = document.getElementById('lb-close');
+
+  function openLightbox(src, caption) {
+    lbImg.src = src;
+    lbImg.alt = caption;
+    lbCap.textContent = caption;
+    lbOverlay.classList.add('lb-open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeLightbox() {
+    lbOverlay.classList.remove('lb-open');
+    document.body.style.overflow = '';
+  }
+
+  lbClose.addEventListener('click', function(e) { e.stopPropagation(); closeLightbox(); });
+  lbOverlay.addEventListener('click', function(e) { if (e.target === lbOverlay) closeLightbox(); });
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closeLightbox();
+  });
+
+  document.querySelectorAll('.pol-card-wrap').forEach(function(wrap) {
+    var img = wrap.querySelector('.pol-photo img');
+    var cap = wrap.querySelector('.pol-caption');
+    if (!img || !cap) return;
+    wrap.querySelector('.pol-inner').addEventListener('click', function() {
+      openLightbox(img.src, cap.textContent.trim());
+    });
+  });
+
+  /* ─── DETAIL PANELS ─── */
+  (function() {
+    var dpOverlay = document.getElementById('dp-overlay');
+    if (!dpOverlay) return;
+
+    var panelIds = ['dp-parties','dp-travel','dp-registry','dp-dresscode','dp-menu','dp-music'];
+    var dCards   = document.querySelectorAll('.d-card');
+
+    function openDetailPanel(panelId) {
+      panelIds.forEach(function(id) {
+        var p = document.getElementById(id);
+        if (p) p.style.display = id === panelId ? '' : 'none';
+      });
+      dpOverlay.classList.add('dp-open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeDetailPanel() {
+      dpOverlay.classList.remove('dp-open');
+      document.body.style.overflow = '';
+    }
+
+    dCards.forEach(function(btn, i) {
+      if (!panelIds[i]) return;
+      btn.addEventListener('click', function() { openDetailPanel(panelIds[i]); });
+    });
+
+    document.querySelectorAll('.dp-close').forEach(function(btn) {
+      btn.addEventListener('click', function(e) { e.stopPropagation(); closeDetailPanel(); });
+    });
+
+    dpOverlay.addEventListener('click', function(e) {
+      if (e.target === dpOverlay) closeDetailPanel();
+    });
+
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape' && dpOverlay.classList.contains('dp-open')) closeDetailPanel();
+    });
+  })();
+
+})();
+</script>
+</body>
+</html>
